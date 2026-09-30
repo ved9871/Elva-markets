@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELVA — Trading Workspace</title>
+<meta name="description" content="ELVA Markets client app prototype — Professional Trading Workspace. Demo environment, all figures illustrative.">
+<link rel="icon" type="image/png" href="assets/elva-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="trade.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell">
+
+  <!-- NAV RAIL -->
+  <nav class="rail" aria-label="Primary">
+    <a class="rail-brand" href="index.html" aria-label="ELVA home">
+      <img src="assets/elva-mark.png" alt="" width="30" height="25">
+      <span class="rail-word">ELVA</span>
+    </a>
+    <ul class="rail-list">
+      <li><a class="rail-item" href="index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5.5v-5h-5v5H4Z"/></svg>
+        <span>Home</span></a></li>
+      <li><a class="rail-item active" href="trade.html" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>
+        <span>Trade</span></a></li>
+      <li><span class="rail-item soon" title="Screen groups 4–6 — ELVA Intelligence">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v3m0 10v3m8-8h-3M7 12H4m13.5-5.5-2 2m-7 7-2 2m11 0-2-2m-7-7-2-2"/><circle cx="12" cy="12" r="3.2"/></svg>
+        <span>Intelligence</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 7 — Copy Trading">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M15.5 6a3 3 0 1 1 0 5.8M15 13.6A5.5 5.5 0 0 1 20.5 19"/></svg>
+        <span>Copy</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 8 — Bot Trading">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="8" width="14" height="10" rx="2"/><path d="M12 8V4m-6.5 9h.01M18.5 13h.01M9 15.5h6"/><circle cx="9" cy="12.5" r=".8"/><circle cx="15" cy="12.5" r=".8"/></svg>
+        <span>Bots</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 10 — Capital flows">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5 12 4l8 4.5-8 4.5Z"/><path d="m4 12.5 8 4.5 8-4.5M4 16.5 12 21l8-4.5"/></svg>
+        <span>Capital</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 10 — Activity &amp; statements">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9"/></svg>
+        <span>Activity</span></span></li>
+    </ul>
+    <div class="rail-foot">
+      <span class="rail-item soon" title="Screen group 10 — Account &amp; security">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
+        <span>Account</span></span>
+      <p class="rail-status"><span class="dot dot-demo"></span><span class="rail-status-text">Demo build</span></p>
+    </div>
+  </nav>
+
+  <div class="body-col">
+
+    <!-- TOP STRIP -->
+    <header class="topstrip">
+      <h1 class="page-title">Trading Workspace</h1>
+      <div class="spine-mini" title="Illustrative capital split — demo data">
+        <span class="spine-mini-bar" aria-hidden="true">
+          <i class="ms ms-active" style="flex:128"></i><i class="ms ms-res" style="flex:32"></i><i class="ms ms-pen" style="flex:8"></i><i class="ms ms-wd" style="flex:32"></i><i class="ms ms-un" style="flex:50"></i>
+        </span>
+        <span class="data">$25,000</span>
+        <span class="asof" id="spine-asof" hidden>delayed +2.4s</span>
+      </div>
+      <div class="topstrip-right">
+        <span class="chip chip-state" id="global-trust" data-state="demo">DEMO</span>
+        <button class="kill-pill" id="kill-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v7"/><path d="M6.6 7a7 7 0 1 0 10.8 0"/></svg>
+          Kill automation
+        </button>
+        <div class="simctl">
+          <button class="simctl-btn" id="sim-btn" aria-expanded="false" aria-controls="sim-menu">Demo states ▾</button>
+          <div class="simctl-menu" id="sim-menu" hidden>
+            <p class="simctl-head">Prototype state preview</p>
+            <label><input type="checkbox" id="st-ai"> AI offline</label>
+            <label><input type="checkbox" id="st-risk"> Risk Engine unavailable</label>
+            <label><input type="checkbox" id="st-delay"> Data delayed</label>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SYSTEM BANNERS -->
+    <div class="banners" aria-live="polite">
+      <div class="banner banner-risk" id="banner-risk" hidden>
+        <strong>Risk Engine unavailable.</strong> Automated execution is blocked — fail closed. Manual trading is unaffected.
+      </div>
+      <div class="banner banner-info" id="banner-kill" hidden>
+        <strong>Automation stopped.</strong> All bot and AI trading halted. Funds and allocations untouched. Event logged to your audit trail.
+        <button class="banner-undo" id="kill-undo">Re-enable</button>
+      </div>
+    </div>
+
+    <main id="main" class="ws">
+
+      <!-- WATCHLIST -->
+      <section class="panel wl" aria-labelledby="wl-h">
+        <header class="panel-head wl-head">
+          <h2 id="wl-h">Watchlist</h2>
+          <span class="chip chip-demo">DEMO</span>
+        </header>
+        <div class="wl-scroll" id="watchlist"></div>
+      </section>
+
+      <!-- CHART -->
+      <section class="panel ws-chart" aria-labelledby="ch-h">
+        <header class="chart-head">
+          <div class="chart-id">
+            <h2 id="ch-h"><span id="ch-sym">EURUSD</span></h2>
+            <label class="visually-hidden" for="sym-select">Select symbol</label>
+            <select id="sym-select" class="sym-select" aria-label="Select symbol"></select>
+          </div>
+          <div class="chart-quote">
+            <span class="q-bid">Bid <strong class="data" id="q-bid">—</strong></span>
+            <span class="q-ask">Ask <strong class="data" id="q-ask">—</strong></span>
+            <span class="q-spr">Spread <span class="data" id="q-spr">—</span></span>
+            <span class="q-chg data" id="q-chg">—</span>
+          </div>
+          <div class="chart-ctl">
+            <div class="tf-group" role="group" aria-label="Timeframe">
+              <button class="tf" data-tf="M15">M15</button>
+              <button class="tf active" data-tf="H1" aria-pressed="true">H1</button>
+              <button class="tf" data-tf="H4">H4</button>
+              <button class="tf" data-tf="D1">D1</button>
+            </div>
+            <span class="chip chip-state" data-trust>DEMO</span>
+          </div>
+        </header>
+        <div class="chart-wrap" id="chart-wrap">
+          <svg id="chart" role="img" aria-label="Demo candlestick chart — illustrative data, not live prices"></svg>
+          <span class="demo-wm" aria-hidden="true">DEMO&nbsp;DATA</span>
+        </div>
+        <p class="chart-foot">Session: London · Illustrative candles generated for demonstration — not market data.</p>
+      </section>
+
+      <!-- ORDER TICKET -->
+      <aside class="panel ws-ticket" id="ticket" aria-labelledby="tk-h">
+        <div class="sheet-grab" aria-hidden="true"></div>
+        <header class="panel-head">
+          <h2 id="tk-h">Order — <span id="tk-sym">EURUSD</span></h2>
+          <span class="chip chip-demo">Simulated</span>
+        </header>
+
+        <form id="ticket-form" novalidate>
+          <div class="side-seg" role="group" aria-label="Order side">
+            <button type="button" class="side side-buy active" id="side-buy" aria-pressed="true">Buy</button>
+            <button type="button" class="side side-sell" id="side-sell" aria-pressed="false">Sell</button>
+          </div>
+
+          <div class="tk-row">
+            <label for="tk-type">Type</label>
+            <select id="tk-type"><option value="market">Market</option><option value="limit">Limit</option></select>
+          </div>
+          <div class="tk-row" id="row-limit" hidden>
+            <label for="tk-limit">Limit price</label>
+            <input type="number" id="tk-limit" step="any" inputmode="decimal">
+          </div>
+          <div class="tk-row">
+            <label for="tk-size">Size (lots)</label>
+            <input type="number" id="tk-size" value="0.10" min="0.01" step="0.01" inputmode="decimal">
+          </div>
+          <div class="tk-row">
+            <label for="tk-sl">Stop loss</label>
+            <input type="number" id="tk-sl" step="any" inputmode="decimal" placeholder="required">
+          </div>
+          <div class="tk-row">
+            <label for="tk-tp">Take profit</label>
+            <input type="number" id="tk-tp" step="any" inputmode="decimal" placeholder="optional">
+          </div>
+
+          <dl class="tk-info">
+            <div><dt>Est. margin</dt><dd class="data" id="tk-margin">—</dd></div>
+            <div><dt>Est. risk</dt><dd class="data" id="tk-risk">—</dd></div>
+            <div><dt>Risk vs cap</dt><dd class="data" id="tk-riskpct">—</dd></div>
+          </dl>
+
+          <div class="verdict" id="risk-verdict" aria-live="polite">
+            <p class="verdict-head">Risk Engine — deterministic check</p>
+            <p class="verdict-body" id="verdict-body">Set a stop loss to run the check.</p>
+          </div>
+
+          <button type="button" class="btn btn-primary tk-review" id="tk-review" disabled>Review order</button>
+        </form>
+
+        <div class="tk-confirm" id="tk-confirm" hidden>
+          <h3>Confirm order</h3>
+          <ul class="confirm-list" id="confirm-list"></ul>
+          <p class="confirm-note">Demo build — this order is simulated. No real order is placed.</p>
+          <div class="confirm-actions">
+            <button class="btn btn-ghost" id="tk-back">Back</button>
+            <button class="btn btn-primary" id="tk-go">Confirm order</button>
+          </div>
+        </div>
+
+        <p class="tk-foot">Manual allocation <span class="data">$10,000</span> · boundaries enforced by the Risk Engine, outside the AI.</p>
+      </aside>
+
+      <!-- TABLES -->
+      <section class="panel ws-tables" aria-labelledby="tb-h">
+        <header class="panel-head tables-head">
+          <h2 id="tb-h" class="visually-hidden">Positions, orders and history</h2>
+          <div class="tab-group" role="tablist" aria-label="Trading records">
+            <button class="ttab active" role="tab" aria-selected="true" id="tab-pos" aria-controls="pane-pos">Positions</button>
+            <button class="ttab" role="tab" aria-selected="false" id="tab-ord" aria-controls="pane-ord">Orders</button>
+            <button class="ttab" role="tab" aria-selected="false" id="tab-his" aria-controls="pane-his">History</button>
+          </div>
+          <span class="chip chip-state" data-trust>DEMO</span>
+        </header>
+
+        <div id="pane-pos" role="tabpanel" aria-labelledby="tab-pos">
+          <table class="pos-table">
+            <thead><tr><th scope="col">Symbol</th><th scope="col">Mode</th><th scope="col">Side</th><th scope="col">Size</th><th scope="col">Entry</th><th scope="col">Mark</th><th scope="col">P&amp;L</th></tr></thead>
+            <tbody id="pos-body">
+              <tr><td data-l="Symbol"><strong>EURUSD</strong></td><td data-l="Mode">Manual</td><td data-l="Side">Long</td><td data-l="Size" class="num">0.50</td><td data-l="Entry" class="num">1.0872</td><td data-l="Mark" class="num">1.0901</td><td data-l="P&amp;L" class="num"><span class="pnl-up">+$145</span></td></tr>
+              <tr><td data-l="Symbol"><strong>XAUUSD</strong></td><td data-l="Mode">Manual</td><td data-l="Side">Short</td><td data-l="Size" class="num">0.10</td><td data-l="Entry" class="num">2,381.40</td><td data-l="Mark" class="num">2,384.10</td><td data-l="P&amp;L" class="num"><span class="pnl-down">−$27</span></td></tr>
+              <tr><td data-l="Symbol"><strong>US500</strong></td><td data-l="Mode">Bot · Grid-2</td><td data-l="Side">Long</td><td data-l="Size" class="num">0.20</td><td data-l="Entry" class="num">5,602.5</td><td data-l="Mark" class="num">5,604.7</td><td data-l="P&amp;L" class="num"><span class="pnl-up">+$44</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="pane-ord" role="tabpanel" aria-labelledby="tab-ord" hidden>
+          <table class="pos-table">
+            <thead><tr><th scope="col">Symbol</th><th scope="col">Type</th><th scope="col">Side</th><th scope="col">Size</th><th scope="col">Price</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><td data-l="Symbol"><strong>GBPUSD</strong></td><td data-l="Type">Limit</td><td data-l="Side">Buy</td><td data-l="Size" class="num">0.20</td><td data-l="Price" class="num">1.2680</td><td data-l="Status">Working</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="pane-his" role="tabpanel" aria-labelledby="tab-his" hidden>
+          <table class="pos-table">
+            <thead><tr><th scope="col">Symbol</th><th scope="col">Side</th><th scope="col">Size</th><th scope="col">Closed</th><th scope="col">P&amp;L</th><th scope="col">Reconciled</th></tr></thead>
+            <tbody>
+              <tr><td data-l="Symbol"><strong>EURUSD</strong></td><td data-l="Side">Long</td><td data-l="Size" class="num">0.30</td><td data-l="Closed" class="num">12:38</td><td data-l="P&amp;L" class="num"><span class="pnl-up">+$89</span></td><td data-l="Reconciled"><span class="tick">MT5 ✓</span> <span class="tick">Ledger ✓</span></td></tr>
+              <tr><td data-l="Symbol"><strong>USDJPY</strong></td><td data-l="Side">Short</td><td data-l="Size" class="num">0.20</td><td data-l="Closed" class="num">10:12</td><td data-l="P&amp;L" class="num"><span class="pnl-down">−$41</span></td><td data-l="Reconciled"><span class="tick">MT5 ✓</span> <span class="tick">Ledger ✓</span></td></tr>
+              <tr><td data-l="Symbol"><strong>XAUUSD</strong></td><td data-l="Side">Long</td><td data-l="Size" class="num">0.05</td><td data-l="Closed" class="num">Yesterday</td><td data-l="P&amp;L" class="num"><span class="pnl-up">+$62</span></td><td data-l="Reconciled"><span class="tick">MT5 ✓</span> <span class="tick">Ledger ✓</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- INTELLIGENCE LENS -->
+      <aside class="panel lens lens-mini" id="lens-panel" aria-labelledby="lens-h">
+        <header class="panel-head">
+          <h2 id="lens-h"><img src="assets/elva-mark.png" alt="" width="18" height="15"> Ask ELVA about <span id="lens-sym">EURUSD</span></h2>
+          <button class="lens-toggle" id="lens-toggle" aria-expanded="true">Hide</button>
+        </header>
+        <div class="lens-body" id="lens-body">
+          <ul class="lens-list" id="lens-list"></ul>
+          <p class="lens-foot">Analysis, not advice · closing this panel never affects trading.</p>
+        </div>
+        <div class="lens-offline" id="lens-offline" hidden>
+          <p><strong>ELVA Intelligence is offline.</strong></p>
+          <p>Trading is unaffected. The ticket, chart and your positions remain fully available.</p>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- BOTTOM TABS (mobile) -->
+    <nav class="tabbar" aria-label="Primary mobile">
+      <a class="tab" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5.5v-5h-5v5H4Z"/></svg>Home</a>
+      <a class="tab active" href="trade.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>Trade</a>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 4v3m0 10v3m8-8h-3M7 12H4"/></svg>Intelligence</span>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5 12 4l8 4.5-8 4.5Z"/><path d="m4 12.5 8 4.5 8-4.5"/></svg>Capital</span>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/></svg>More</span>
+    </nav>
+
+  </div>
+</div>
+
+<!-- Mobile order FAB + sheet backdrop -->
+<button class="fab" id="fab-order">New order</button>
+<div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<!-- KILL SWITCH DIALOG -->
+<div class="dialog-backdrop" id="kill-dialog" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="kd-h" aria-describedby="kd-p">
+    <h2 id="kd-h">Stop all automation?</h2>
+    <p id="kd-p">This halts every bot and all AI trading immediately. It does not close positions, move capital or touch your funds — bots and AI can trade, they can never withdraw. The event is written to your audit trail.</p>
+    <label class="kd-check"><input type="checkbox" id="kd-confirm"> Stop all bot and AI trading now</label>
+    <div class="dialog-actions">
+      <button class="btn btn-ghost" id="kd-cancel">Cancel</button>
+      <button class="btn btn-danger" id="kd-go" disabled>Confirm stop</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="trade.js"></script>
+</body>
+</html>

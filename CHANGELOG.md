@@ -1,5 +1,37 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · Trading Workspace (`feature/trading-workspace`)
+
+**Implemented**
+- `app/trade.html|trade.css|trade.js`: Professional Trading Workspace per
+  Design Architecture §7.3 and `docs/specs/TRADING_WORKSPACE_SPEC.md`, inside the
+  reused app shell (same top strip, banners, kill dialog, demo-state switcher).
+- Grouped watchlist (FX/Metals/Indices/Commodities/Crypto) → horizontal strip on
+  tablet, symbol select on mobile; seeded deterministic SVG candlestick chart with
+  timeframes, axis, last-price line, SL/TP preview lines, diagonal DEMO watermark.
+- Order ticket: side/type/size/SL/TP, demo margin & risk estimates, inline
+  **Risk Engine — deterministic check** verdict (PASS / BLOCKED with violated
+  rule / verdict-unavailable when engine down; manual orders proceed per
+  handbook — fail-closed gates automated execution only), two-step confirm,
+  simulated fill appends to Positions with toast. SL required by demo boundary
+  profile; wrong-side SL blocked; >1% risk blocked.
+- Positions / Orders / History tabs (history rows carry MT5 ✓ / Ledger ✓ ticks);
+  collapsible "Ask ELVA" Lens mini-panel driven by the shared AI-offline state.
+- Mobile: ticket as bottom sheet with FAB, Esc/backdrop close.
+- Nav: "Trade" activated on both app pages (rail + tab bar).
+
+**QA evidence**
+- No horizontal overflow at 1440/1280/1024/768/390/375/360; no console errors.
+- Defects found and fixed during QA: grid items missing `min-width:0` (+5/+14px
+  overflow), rotated watermark bounding box leak (chart overflow hidden), fixed
+  sheet spanning the classic-scrollbar gutter (JS width pin + matchMedia),
+  mobile input auto-zoom on focus (inputs ≥16px at ≤560px).
+- Ticket state machine tested programmatically: neutral→PASS→BLOCKED (risk cap)
+  →BLOCKED (wrong-side SL)→review→confirm→position added; Risk-down verdict
+  unavailable with manual unaffected; AI-offline Lens placeholder with ticket
+  unaffected; tabs and symbol/timeframe switching verified.
+
+
 ## 2026-09-30 — Phase B · App Shell + Capital Command Center (`feature/app-shell-command-center`)
 
 **Implemented**
