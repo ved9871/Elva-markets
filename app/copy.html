@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELVA — Copy Trading</title>
+<meta name="description" content="ELVA Markets client app prototype — Copy Trading discovery. Demo environment, all figures illustrative.">
+<link rel="icon" type="image/png" href="assets/elva-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="copy.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell">
+
+  <nav class="rail" aria-label="Primary">
+    <a class="rail-brand" href="index.html" aria-label="ELVA home">
+      <img src="assets/elva-mark.png" alt="" width="30" height="25">
+      <span class="rail-word">ELVA</span>
+    </a>
+    <ul class="rail-list">
+      <li><a class="rail-item" href="index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5.5v-5h-5v5H4Z"/></svg>
+        <span>Home</span></a></li>
+      <li><a class="rail-item" href="trade.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>
+        <span>Trade</span></a></li>
+      <li><a class="rail-item" href="intelligence.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v3m0 10v3m8-8h-3M7 12H4m13.5-5.5-2 2m-7 7-2 2m11 0-2-2m-7-7-2-2"/><circle cx="12" cy="12" r="3.2"/></svg>
+        <span>Intelligence</span></a></li>
+      <li><a class="rail-item active" href="copy.html" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M15.5 6a3 3 0 1 1 0 5.8M15 13.6A5.5 5.5 0 0 1 20.5 19"/></svg>
+        <span>Copy</span></a></li>
+      <li><span class="rail-item soon" title="Screen group 8 — Bot Trading">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="8" width="14" height="10" rx="2"/><path d="M12 8V4m-6.5 9h.01M18.5 13h.01M9 15.5h6"/><circle cx="9" cy="12.5" r=".8"/><circle cx="15" cy="12.5" r=".8"/></svg>
+        <span>Bots</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 10 — Capital flows">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5 12 4l8 4.5-8 4.5Z"/><path d="m4 12.5 8 4.5 8-4.5M4 16.5 12 21l8-4.5"/></svg>
+        <span>Capital</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 10 — Activity &amp; statements">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9"/></svg>
+        <span>Activity</span></span></li>
+    </ul>
+    <div class="rail-foot">
+      <span class="rail-item soon" title="Screen group 10 — Account &amp; security">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
+        <span>Account</span></span>
+      <p class="rail-status"><span class="dot dot-demo"></span><span class="rail-status-text">Demo build</span></p>
+    </div>
+  </nav>
+
+  <div class="body-col">
+
+    <header class="topstrip">
+      <h1 class="page-title">Copy Trading</h1>
+      <div class="spine-mini" title="Illustrative capital split — demo data">
+        <span class="spine-mini-bar" aria-hidden="true">
+          <i class="ms ms-active" style="flex:128"></i><i class="ms ms-res" style="flex:32"></i><i class="ms ms-pen" style="flex:8"></i><i class="ms ms-wd" style="flex:32"></i><i class="ms ms-un" style="flex:50"></i>
+        </span>
+        <span class="data">$25,000</span>
+        <span class="asof" id="spine-asof" hidden>delayed +2.4s</span>
+      </div>
+      <div class="topstrip-right">
+        <span class="chip chip-state" id="global-trust" data-state="demo">DEMO</span>
+        <button class="kill-pill" id="kill-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v7"/><path d="M6.6 7a7 7 0 1 0 10.8 0"/></svg>
+          Kill automation
+        </button>
+        <div class="simctl">
+          <button class="simctl-btn" id="sim-btn" aria-expanded="false" aria-controls="sim-menu">Demo states ▾</button>
+          <div class="simctl-menu" id="sim-menu" hidden>
+            <p class="simctl-head">Prototype state preview</p>
+            <label><input type="checkbox" id="st-ai"> AI offline</label>
+            <label><input type="checkbox" id="st-risk"> Risk Engine unavailable</label>
+            <label><input type="checkbox" id="st-delay"> Data delayed</label>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="banners" aria-live="polite">
+      <div class="banner banner-risk" id="banner-risk" hidden>
+        <strong>Risk Engine unavailable.</strong> Automated execution — including copy execution — is blocked, fail closed. Manual trading is unaffected.
+      </div>
+      <div class="banner banner-info" id="banner-kill" hidden>
+        <strong>Automation stopped.</strong> All bot, AI and copy trading halted. Funds and allocations untouched. Event logged to your audit trail.
+        <button class="banner-undo" id="kill-undo">Re-enable</button>
+      </div>
+    </div>
+
+    <main id="main" class="copy">
+
+      <section class="copy-head">
+        <h2>Verified behavior. Not promises.</h2>
+        <p>Providers are shown with verified platform data — history, drawdown, concentration and behavior. There is no return leaderboard here, by design.</p>
+      </section>
+
+      <section class="panel filterbar" aria-label="Filter and sort providers">
+        <div class="f-group" role="group" aria-label="Classification">
+          <button class="fseg active" data-cls="all" aria-pressed="true">All</button>
+          <button class="fseg" data-cls="Manual" aria-pressed="false">Manual</button>
+          <button class="fseg" data-cls="Bot" aria-pressed="false">Bot</button>
+          <button class="fseg" data-cls="Hybrid" aria-pressed="false">Hybrid</button>
+        </div>
+        <label class="f-sort">Sort by
+          <select id="sort-sel">
+            <option value="months">Longest verified history</option>
+            <option value="dd">Lowest max drawdown</option>
+            <option value="freq">Lowest trade frequency</option>
+          </select>
+        </label>
+        <span class="chip chip-demo">All data DEMO</span>
+      </section>
+
+      <section class="prov-grid" id="prov-grid" aria-label="Strategy providers"></section>
+
+      <p class="intel-disclaimer">Past behavior does not predict future results, and copied losses are your losses. Copying runs inside a dedicated allocation with your own risk limits and stop-copy conditions; providers can never reach your unallocated capital. Demo environment — activation is simulated.</p>
+
+      <!-- stubs for the shared shell's AI-offline switch (no Lens panel on discovery) -->
+      <div id="lens-body" hidden aria-hidden="true"></div>
+      <div id="lens-offline" hidden aria-hidden="true"></div>
+
+    </main>
+
+    <nav class="tabbar" aria-label="Primary mobile">
+      <a class="tab" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5.5v-5h-5v5H4Z"/></svg>Home</a>
+      <a class="tab" href="trade.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>Trade</a>
+      <a class="tab" href="intelligence.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 4v3m0 10v3m8-8h-3M7 12H4"/></svg>Intelligence</a>
+      <a class="tab active" href="copy.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/></svg>Copy</a>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/></svg>More</span>
+    </nav>
+
+  </div>
+</div>
+
+<div class="dialog-backdrop" id="kill-dialog" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="kd-h" aria-describedby="kd-p">
+    <h2 id="kd-h">Stop all automation?</h2>
+    <p id="kd-p">This halts every bot, all AI trading and all copy execution immediately. It does not close positions, move capital or touch your funds — automation can trade, it can never withdraw. The event is written to your audit trail.</p>
+    <label class="kd-check"><input type="checkbox" id="kd-confirm"> Stop all automated trading now</label>
+    <div class="dialog-actions">
+      <button class="btn btn-ghost" id="kd-cancel">Cancel</button>
+      <button class="btn btn-danger" id="kd-go" disabled>Confirm stop</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="copy-data.js"></script>
+<script src="copy.js"></script>
+</body>
+</html>
