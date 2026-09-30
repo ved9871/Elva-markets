@@ -1,5 +1,34 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · Portfolio Doctor + Exposure Map (`feature/portfolio-doctor`)
+
+**Implemented**
+- `app/doctor.html|doctor.css|doctor.js` per Design Architecture §7.10 and
+  `docs/specs/PORTFOLIO_DOCTOR_SPEC.md`, under the Intelligence domain.
+- Doctor's summary in Lens voice (degrades to placeholder when AI offline).
+- Exposure Map: dependency-free slice-and-dice treemap of open-risk share with
+  Currency / Instrument / Mode group-by (each sums to 100%), heat by share,
+  amber concentration flag on USD (68%, consistent with the rest of the demo),
+  accessible text alternative per grouping.
+- Findings ranked by severity: USD concentration, leverage creep (4.1x→6.2x),
+  bot regime mismatch — each with an inline Lens **Explain** toggle and
+  **Act →** links into the owning Risk Boundary surfaces (copy monitor,
+  permissions, Bot Health) — plus two green discipline findings so the page
+  reads as measurement, not alarm. Nothing executes from this page.
+- Behavior panel from the journal: session bias, early exits on winners, no
+  revenge trading (measured framing, sources noted).
+- AI-offline gates explanations only; measurements and map stay live.
+- Mobile: findings ordered before the map (§8); Intelligence Home Doctor card
+  now links here.
+
+**QA evidence**
+- No horizontal overflow at 1440/768/390/360 (sampled) with clean sweeps; no
+  console errors.
+- Programmatic tests pass: all three groupings sum to 100 with correct cell
+  counts, USD flag placement, explain open/close, AI-offline summary +
+  disabled explains + restore, mobile ordering via CSS order.
+
+
 ## 2026-09-30 — Phase B · Bot Trading (`feature/bot-trading`)
 
 **Implemented**
