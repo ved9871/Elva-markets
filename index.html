@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELVA Markets — Demo</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="ELVA Markets prototype hub — demo environment, invite-only, all figures illustrative.">
+<link rel="icon" type="image/png" href="landing/assets/elva-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --navy-900:#070D1B; --navy-850:#0A1424; --line:#24385C; --frost:#F2F6FC;
+    --silver:#8FA2BF; --muted:#5F7294; --blue:#2B66FF; --violet:#9B8CFF; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--navy-900); color:var(--frost); font-family:Inter,sans-serif;
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px 16px; }
+  .hub { width:100%; max-width:520px; text-align:center; }
+  .mark { width:64px; height:53px; margin-bottom:18px; }
+  h1 { font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:28px; letter-spacing:.04em; }
+  h1 small { display:block; font-size:11px; letter-spacing:.4em; color:#5A8AFF; margin-top:4px; }
+  .demo { display:inline-block; margin:16px 0 8px; font-size:11px; font-weight:600; letter-spacing:.1em;
+    color:var(--violet); border:1px solid rgba(155,140,255,.4); border-radius:6px; padding:4px 12px; }
+  p.sub { color:var(--silver); font-size:14px; line-height:1.6; margin-bottom:28px; }
+  .links { display:grid; gap:12px; }
+  a.card { display:block; text-decoration:none; background:var(--navy-850); border:1px solid var(--line);
+    border-radius:14px; padding:18px 20px; text-align:left; transition:border-color .15s ease; }
+  a.card:hover { border-color:var(--blue); }
+  a.card strong { display:block; color:var(--frost); font-size:15.5px; margin-bottom:4px; }
+  a.card span { color:var(--muted); font-size:12.5px; line-height:1.5; }
+  footer { margin-top:28px; font-size:11.5px; color:var(--muted); line-height:1.6; }
+</style>
+</head>
+<body>
+<main class="hub">
+  <img class="mark" src="landing/assets/elva-mark.png" alt="ELVA Markets">
+  <h1>ELVA<small>MARKETS</small></h1>
+  <span class="demo">DEMO ENVIRONMENT · INVITE ONLY</span>
+  <p class="sub">Design prototype. No real deposits, trades or withdrawals — every figure is illustrative and labelled.</p>
+  <div class="links">
+    <a class="card" href="landing/"><strong>Public landing page</strong><span>Positioning, four trading modes, ELVA Intelligence, the Transparent Capital Layer and security model.</span></a>
+    <a class="card" href="app/"><strong>Client app prototype</strong><span>Capital Command Center, trading workspace, Intelligence suite, copy &amp; bot trading, capital flows and security — with live degradation-state demos.</span></a>
+  </div>
+  <footer>Trading leveraged products involves significant risk of loss. Nothing here is investment advice or an offer of financial services. © 2026 ELVA Markets.</footer>
+</main>
+</body>
+</html>
