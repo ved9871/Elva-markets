@@ -1,5 +1,46 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · Capital + Security (`feature/capital-security`)
+
+**Implemented**
+- `app/capital.html` + `capital.css|capital.js` per Design Architecture §7.9
+  and journeys J1/J6/J9 (`docs/specs/CAPITAL_SECURITY_SPEC.md`); `security.html`
+  + `security.js` for Account & Security.
+- Full Capital Spine as a live state machine: five rendered states summing to
+  the total, animated flex transitions (reduced-motion safe), every movement an
+  explicit transition mirrored in the legend, overview cards and activity.
+- Deposit (J6): asset/network selects with wrong-network warning, demo address
+  + decorative QR (labelled not real), simulated incoming 2,000 USDC →
+  confirmations 0→12 with SETTLEMENT PENDING chip (delayed state slows and
+  labels the feed) → CREDITED to Unallocated with ledger reference.
+- Allocate (J1): both directions with source-state caps, reserved-margin
+  immovability explained, boundary note, two-step confirm, audit toast.
+- Withdraw (J9): Withdrawable only with all locked states listed and reasoned;
+  whitelisted-address select (additions gated behind security review, out of
+  demo); 6-digit 2FA step (demo-labelled); full restatement with
+  irreversibility warning; requested→signed→broadcast→confirmed tracker;
+  audit id. **REU and kill switch never touch this flow — custody is
+  user-controlled.** AI/bots stated as having no path in.
+- Activity: reconciled rows showing only the records each event touches
+  (chain/MT5/ledger/audit), filters, dynamic appends from all flows;
+  `?tab=` deep links (rail "Activity" lands on the tab).
+- Security: KYC/region, TOTP 2FA card, devices with revoke (writes to the
+  audit trail), whitelisted addresses, personal audit trail, architecture
+  statement.
+- Nav completed across all 13 app pages: Capital, Activity and Account now
+  live everywhere; Command Center spine card links here; mobile tab bar
+  gains Capital/Account on capital-family pages.
+
+**QA evidence**
+- Both pages: no horizontal overflow at 1440/768/390/360 sweeps; no console
+  errors.
+- Programmatic tests pass: spine render/sums, allocation cap errors + both
+  directions with correct legend values, withdrawal validation chain (amount
+  cap → whitelist → 2FA) + tracker + balance reduction, deposit lifecycle to
+  CREDITED with Unallocated increase, activity growth + filters, security
+  revoke + audit growth.
+
+
 ## 2026-09-30 — Phase B · Portfolio Doctor + Exposure Map (`feature/portfolio-doctor`)
 
 **Implemented**
