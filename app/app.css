@@ -266,3 +266,21 @@ p { color: var(--silver-400); }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+/* ---------- mobile touch-target & focus-zoom compliance (screen group 11) ---------- */
+@media (max-width: 560px) {
+  /* primary + segmented controls to the 44px architecture bar */
+  .kill-pill, .simctl-btn, .btn-sm,
+  .fseg, .gseg, .tf, .achip, .explain-btn, .lens-toggle,
+  .ctab, .ttab, .side, .mseg, .arg-toggle { min-height: 44px; }
+  /* inline action links gain tap padding without layout redesign */
+  .meta-link, .strat-open, .act-link, .bcard-cta, .pcard-cta,
+  .proposal-link, .crumb a, .banner-undo { display: inline-block; padding: 13px 2px; }
+  .mx-toggle { padding: 11px 0; }
+  /* focus-zoom prevention: text-entry controls ≥16px everywhere
+     (!important outranks per-page class font sizes — compliance layer) */
+  select, textarea,
+  input[type="text"], input[type="number"], input[type="email"], input[type="search"] {
+    font-size: 16px !important; min-height: 44px;
+  }
+}

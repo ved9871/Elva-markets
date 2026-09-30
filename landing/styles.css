@@ -447,6 +447,9 @@ a { color: inherit; }
 
 @media (max-width: 560px) {
   body { font-size: 15px; }
+  .invite-form input { font-size: 16px; min-height: 44px; }   /* prevents mobile focus zoom */
+  .footer-links a, .nav-links a { display: inline-block; padding: 10px 2px; }
+  .faq-inner summary { min-height: 44px; }
   .utility-bar { font-size: 11px; }
   .utility-demo { display: block; }
   .nav-right .btn { display: none; }
