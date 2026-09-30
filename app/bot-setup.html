@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELVA — Bot Setup</title>
+<meta name="description" content="ELVA Markets client app prototype — Bot setup wizard. Demo environment, all figures illustrative.">
+<link rel="icon" type="image/png" href="assets/elva-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="bots.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell">
+
+  <nav class="rail" aria-label="Primary">
+    <a class="rail-brand" href="index.html" aria-label="ELVA home">
+      <img src="assets/elva-mark.png" alt="" width="30" height="25">
+      <span class="rail-word">ELVA</span>
+    </a>
+    <ul class="rail-list">
+      <li><a class="rail-item" href="index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5.5v-5h-5v5H4Z"/></svg>
+        <span>Home</span></a></li>
+      <li><a class="rail-item" href="trade.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>
+        <span>Trade</span></a></li>
+      <li><a class="rail-item" href="intelligence.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v3m0 10v3m8-8h-3M7 12H4m13.5-5.5-2 2m-7 7-2 2m11 0-2-2m-7-7-2-2"/><circle cx="12" cy="12" r="3.2"/></svg>
+        <span>Intelligence</span></a></li>
+      <li><a class="rail-item" href="copy.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M15.5 6a3 3 0 1 1 0 5.8M15 13.6A5.5 5.5 0 0 1 20.5 19"/></svg>
+        <span>Copy</span></a></li>
+      <li><a class="rail-item active" href="bots.html" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="8" width="14" height="10" rx="2"/><path d="M12 8V4m-6.5 9h.01M18.5 13h.01M9 15.5h6"/><circle cx="9" cy="12.5" r=".8"/><circle cx="15" cy="12.5" r=".8"/></svg>
+        <span>Bots</span></a></li>
+      <li><span class="rail-item soon" title="Screen group 10 — Capital flows">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5 12 4l8 4.5-8 4.5Z"/><path d="m4 12.5 8 4.5 8-4.5M4 16.5 12 21l8-4.5"/></svg>
+        <span>Capital</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 10 — Activity &amp; statements">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9"/></svg>
+        <span>Activity</span></span></li>
+    </ul>
+    <div class="rail-foot">
+      <span class="rail-item soon" title="Screen group 10 — Account &amp; security">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
+        <span>Account</span></span>
+      <p class="rail-status"><span class="dot dot-demo"></span><span class="rail-status-text">Demo build</span></p>
+    </div>
+  </nav>
+
+  <div class="body-col">
+
+    <header class="topstrip">
+      <h1 class="page-title">Bot Setup</h1>
+      <div class="spine-mini" title="Illustrative capital split — demo data">
+        <span class="spine-mini-bar" aria-hidden="true">
+          <i class="ms ms-active" style="flex:128"></i><i class="ms ms-res" style="flex:32"></i><i class="ms ms-pen" style="flex:8"></i><i class="ms ms-wd" style="flex:32"></i><i class="ms ms-un" style="flex:50"></i>
+        </span>
+        <span class="data">$25,000</span>
+        <span class="asof" id="spine-asof" hidden>delayed +2.4s</span>
+      </div>
+      <div class="topstrip-right">
+        <span class="chip chip-state" id="global-trust" data-state="demo">DEMO</span>
+        <button class="kill-pill" id="kill-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v7"/><path d="M6.6 7a7 7 0 1 0 10.8 0"/></svg>
+          Kill automation
+        </button>
+        <div class="simctl">
+          <button class="simctl-btn" id="sim-btn" aria-expanded="false" aria-controls="sim-menu">Demo states ▾</button>
+          <div class="simctl-menu" id="sim-menu" hidden>
+            <p class="simctl-head">Prototype state preview</p>
+            <label><input type="checkbox" id="st-ai"> AI offline</label>
+            <label><input type="checkbox" id="st-risk"> Risk Engine unavailable</label>
+            <label><input type="checkbox" id="st-delay"> Data delayed</label>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="banners" aria-live="polite">
+      <div class="banner banner-risk" id="banner-risk" hidden>
+        <strong>Risk Engine unavailable.</strong> Automated execution — bots included — is blocked, fail closed. Manual trading is unaffected.
+      </div>
+      <div class="banner banner-info" id="banner-kill" hidden>
+        <strong>Automation stopped.</strong> All bot, AI and copy trading halted. Funds and allocations untouched. Event logged to your audit trail.
+        <button class="banner-undo" id="kill-undo">Re-enable</button>
+      </div>
+    </div>
+
+    <main id="main" class="wiz">
+
+      <p class="crumb"><a href="bots.html">← Bots</a></p>
+
+      <section class="panel wiz-panel" aria-labelledby="wz-h">
+        <header class="panel-head">
+          <h2 id="wz-h">Add a bot</h2>
+          <span class="rb-tag">Risk Boundary</span>
+        </header>
+
+        <ol class="steps" id="wz-steps">
+          <li class="on" data-step="1"><span>1</span>Connect</li>
+          <li data-step="2"><span>2</span>Permissions</li>
+          <li data-step="3"><span>3</span>Capital &amp; risk</li>
+          <li data-step="4"><span>4</span>Review</li>
+        </ol>
+
+        <section class="step-card" id="wz-1" tabindex="-1">
+          <p class="wiz-lede">Where does this bot come from?</p>
+          <div class="src-grid" role="radiogroup" aria-label="Bot source">
+            <label class="src-card"><input type="radio" name="src" value="Uploaded EA file" checked> <span><strong>Upload an EA file</strong><small>MT5 Expert Advisor (.ex5) — reviewed before it can run</small></span></label>
+            <label class="src-card"><input type="radio" name="src" value="EA on your MT5 account"> <span><strong>EA on your MT5 account</strong><small>Attach an Expert Advisor already on your trading account</small></span></label>
+            <label class="src-card"><input type="radio" name="src" value="API connection"> <span><strong>API connection</strong><small>External algorithm trading through permitted API access</small></span></label>
+          </div>
+          <div class="tk-row wiz-name"><label for="wz-name">Bot name</label>
+            <input type="text" id="wz-name" value="Breakout-EU" maxlength="24"></div>
+          <p class="cfg-err" id="wz-err1" hidden></p>
+          <div class="step-actions"><button class="btn btn-primary" id="wz-n1">Permissions →</button></div>
+        </section>
+
+        <section class="step-card" id="wz-2" hidden tabindex="-1">
+          <p class="wiz-lede">What may it trade?</p>
+          <div class="mkt-checks">
+            <label class="kd-check"><input type="checkbox" id="mk-fx" checked> FX majors</label>
+            <label class="kd-check"><input type="checkbox" id="mk-met"> Gold &amp; metals</label>
+            <label class="kd-check"><input type="checkbox" id="mk-idx"> Indices</label>
+            <label class="kd-check"><input type="checkbox" id="mk-cr"> Crypto</label>
+          </div>
+          <p class="mx-divider">Never — by architecture, not settings</p>
+          <ul class="mx-list mx-never">
+            <li><span class="lock" aria-hidden="true">🔒</span> Withdraw funds <em>your custody controls only</em></li>
+            <li><span class="lock" aria-hidden="true">🔒</span> Change wallets or security <em>your security controls</em></li>
+            <li><span class="lock" aria-hidden="true">🔒</span> Exceed its dedicated allocation <em>held apart</em></li>
+            <li><span class="lock" aria-hidden="true">🔒</span> Override the Risk Engine <em>not permitted</em></li>
+          </ul>
+          <p class="cfg-err" id="wz-err2" hidden></p>
+          <div class="step-actions">
+            <button class="btn btn-ghost" id="wz-b2">← Back</button>
+            <button class="btn btn-primary" id="wz-n2">Capital &amp; risk →</button>
+          </div>
+        </section>
+
+        <section class="step-card" id="wz-3" hidden tabindex="-1">
+          <p class="wiz-lede">Its capital, its caps — inside your account boundaries.</p>
+          <div class="tk-row"><label for="wz-alloc">Dedicated allocation</label>
+            <input type="number" id="wz-alloc" value="1000" min="100" max="5000" step="100" inputmode="numeric"></div>
+          <p class="cfg-hint">From your Unallocated capital — <span class="data">$5,000</span> available. The bot can never reach beyond it.</p>
+          <div class="tk-row"><label for="wz-dloss">Max daily loss</label>
+            <input type="number" id="wz-dloss" value="60" min="10" step="10" inputmode="numeric"></div>
+          <div class="tk-row"><label for="wz-size">Max position size (lots)</label>
+            <input type="number" id="wz-size" value="0.30" min="0.01" step="0.01" inputmode="decimal"></div>
+          <div class="tk-row"><label for="wz-pos">Max simultaneous positions</label>
+            <input type="number" id="wz-pos" value="3" min="1" step="1" inputmode="numeric"></div>
+          <div class="tk-row"><label for="wz-lev">Max leverage</label>
+            <input type="number" id="wz-lev" value="8" min="1" step="1" inputmode="numeric"></div>
+          <p class="cfg-hint">Account boundary profile caps apply: daily loss ≤ $400 · leverage ≤ 10x · positions ≤ 8.</p>
+          <p class="cfg-err" id="wz-err3" hidden></p>
+          <div class="step-actions">
+            <button class="btn btn-ghost" id="wz-b3">← Back</button>
+            <button class="btn btn-primary" id="wz-n3">Review contract →</button>
+          </div>
+        </section>
+
+        <section class="step-card" id="wz-4" hidden tabindex="-1">
+          <h3 class="ct-h">Bot contract</h3>
+          <ul class="confirm-list" id="wz-contract"></ul>
+          <p class="confirm-note">Demo build — activation is simulated. The bot's live record starts at zero and is never merged with any backtest.</p>
+          <p class="cfg-err" id="wz-block" hidden></p>
+          <div class="step-actions">
+            <button class="btn btn-ghost" id="wz-b4">← Back</button>
+            <button class="btn btn-primary" id="wz-go">Activate bot</button>
+          </div>
+        </section>
+
+        <section class="step-card" id="wz-done" hidden tabindex="-1">
+          <p class="receipt-head">Bot activated <span class="chip chip-demo">DEMO · simulated</span></p>
+          <ul class="receipt-list">
+            <li><span>Bot</span><strong id="wzd-name">—</strong></li>
+            <li><span>Allocation</span><strong class="data" id="wzd-alloc">—</strong></li>
+            <li><span>Audit</span><strong class="data">BOT-SET-0031 · contract logged</strong></li>
+            <li><span>Health</span><strong>Baseline neutral — live record begins now</strong></li>
+          </ul>
+          <div class="step-actions">
+            <a class="btn btn-primary" href="bots.html">Back to bots</a>
+            <a class="btn btn-ghost" href="index.html">Command Center</a>
+          </div>
+        </section>
+      </section>
+
+      <p class="intel-disclaimer">A bot can trade. A bot can never withdraw. All caps are enforced by the deterministic Risk Engine, outside the bot and outside the AI. Demo environment — activation is simulated.</p>
+
+      <div id="lens-body" hidden aria-hidden="true"></div>
+      <div id="lens-offline" hidden aria-hidden="true"></div>
+
+    </main>
+
+    <nav class="tabbar" aria-label="Primary mobile">
+      <a class="tab" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5.5v-5h-5v5H4Z"/></svg>Home</a>
+      <a class="tab" href="trade.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>Trade</a>
+      <a class="tab" href="intelligence.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 4v3m0 10v3m8-8h-3M7 12H4"/></svg>Intelligence</a>
+      <a class="tab" href="copy.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/></svg>Copy</a>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/></svg>More</span>
+    </nav>
+
+  </div>
+</div>
+
+<div class="toast" id="bot-toast" role="status" aria-live="polite" hidden></div>
+
+<div class="dialog-backdrop" id="kill-dialog" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="kd-h" aria-describedby="kd-p">
+    <h2 id="kd-h">Stop all automation?</h2>
+    <p id="kd-p">This halts every bot, all AI trading and all copy execution immediately. It does not close positions, move capital or touch your funds — a bot can trade, a bot can never withdraw. The event is written to your audit trail.</p>
+    <label class="kd-check"><input type="checkbox" id="kd-confirm"> Stop all automated trading now</label>
+    <div class="dialog-actions">
+      <button class="btn btn-ghost" id="kd-cancel">Cancel</button>
+      <button class="btn btn-danger" id="kd-go" disabled>Confirm stop</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="bots-data.js"></script>
+<script src="bot-setup.js"></script>
+</body>
+</html>

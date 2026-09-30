@@ -1,5 +1,40 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · Bot Trading (`feature/bot-trading`)
+
+**Implemented**
+- `app/bots.html` (dashboard), `app/bot.html` (Bot Health), `app/bot-setup.html`
+  (wizard) + `bots.css`, `bots-data.js`, `bots.js`, `bot.js`, `bot-setup.js`
+  per Design Architecture §7.8 / journey J4 and `docs/specs/BOT_TRADING_SPEC.md`.
+- Dashboard: bot cards with SVG Health rings (Momentum-7 amber 61, Grid-2 86),
+  allocations summing to the Command Center's $3,000, per-card status; REU/kill
+  halt both cards fail-closed and recover; marketplace placeholder (roadmap).
+- Bot Health: health ring + four trait meters (backtest divergence, drawdown vs
+  cap, execution quality, boundary discipline), **performance triptych with
+  Backtest (author-supplied, unverified) / Demo / Live strictly separated and
+  never merged**, permission panel recap, Bot Inspector (Lens, behavioral, no
+  guarantees, AI-offline degrades commentary only), pause/resume/stop with
+  two-step confirms — stop releases the allocation and restates "a bot can
+  never withdraw".
+- Setup wizard (J4): Connect (source + name) → Permissions (markets + locked
+  NEVER rows) → Capital & risk validated against the account boundary profile
+  (daily loss ≤ $400, leverage ≤ 10x, positions ≤ 8, allocation ≤ $5,000
+  Unallocated) → contract review (8 rows incl. "Can withdraw: Never — by
+  architecture") → simulated activation with neutral Health baseline; REU/kill
+  block activation.
+- Nav: "Bots" activated on all app pages; Command Center Bots card links to
+  the dashboard; bot pages generated from a shared shell template script.
+
+**QA evidence**
+- All three pages: no horizontal overflow at the locked breakpoints sampled
+  (1440/768/390/360 each, full sweep on dashboard/detail); no console errors.
+- Programmatic tests pass: dashboard halt/recover, detail render (ring, traits,
+  triptych with "Unverified" backtest, 6 permission rows), Inspector +
+  AI-offline, pause/resume/REU-halt/stop state machine, wizard validation
+  chain (name, ≥1 market, daily-loss cap, leverage cap), contract, REU
+  block/unblock, activation receipt.
+
+
 ## 2026-09-30 — Phase B · Copy Trading (`feature/copy-trading`)
 
 **Implemented**
