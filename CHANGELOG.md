@@ -1,5 +1,35 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · ELVA Intelligence Home (`feature/intelligence-home`)
+
+**Implemented**
+- `app/intelligence.html|intelligence.css|intelligence.js` per Design
+  Architecture §7.4 and `docs/specs/INTELLIGENCE_HOME_SPEC.md`, in the shared
+  app shell.
+- Operating-mode selector framed as a Risk Boundary contract: Copilot / Confirm
+  switchable with consequence copy; **Autopilot visibly locked** ("Not available
+  in this phase", per C2) — a disabled control, not a toggle.
+- ASK bar with suggestion chips and a deterministic demo Q&A engine (EURUSD,
+  Atlas FX provider, Momentum-7 bot, portfolio review); free text keyword-matches
+  or falls back honestly to the demo's covered topics. Answers render in Lens
+  voice as WHY / CHALLENGE / INVALIDATION with stage chip + freshness footer.
+- Full labelled 9-step lifecycle rail; lit steps track active work and the
+  latest answer; step 5 styled as the deterministic Risk Engine (red, non-AI).
+- Active-work strategy cards (stage + "setup confidence — not a probability of
+  profit" chips), Market Scanner digest, amber Portfolio Doctor flag, journal
+  teasers, "What ELVA can never do" architecture card, page-level disclaimer.
+- Whole-page AI-offline degradation (content → placeholder + link to manual
+  trading); Risk-Engine-down note on execution modes; delayed-data freshness.
+- Nav: "Intelligence" activated on all app pages (rail + tab bar).
+
+**QA evidence**
+- No horizontal overflow at 1440/1280/1024/768/390/375/360 (clean on first
+  audit); no console errors.
+- Programmatic tests pass: chip answers + lifecycle lighting, free-text match,
+  unknown-question fallback, mode switching, Autopilot locked, Risk-down note,
+  full-page AI-offline and restore, delayed freshness line.
+
+
 ## 2026-09-30 — Phase B · Trading Workspace (`feature/trading-workspace`)
 
 **Implemented**
