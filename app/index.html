@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELVA — Capital Command Center</title>
+<meta name="description" content="ELVA Markets client app prototype — Capital Command Center. Demo environment, all figures illustrative.">
+<link rel="icon" type="image/png" href="assets/elva-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell">
+
+  <!-- NAV RAIL -->
+  <nav class="rail" aria-label="Primary">
+    <a class="rail-brand" href="#" aria-label="ELVA home">
+      <img src="assets/elva-mark.png" alt="" width="30" height="25">
+      <span class="rail-word">ELVA</span>
+    </a>
+    <ul class="rail-list">
+      <li><a class="rail-item active" href="#" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5.5v-5h-5v5H4Z"/></svg>
+        <span>Home</span></a></li>
+      <li><span class="rail-item soon" title="Screen group 3 — Trading Workspace">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>
+        <span>Trade</span></span></li>
+      <li><span class="rail-item soon" title="Screen groups 4–6 — ELVA Intelligence">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v3m0 10v3m8-8h-3M7 12H4m13.5-5.5-2 2m-7 7-2 2m11 0-2-2m-7-7-2-2"/><circle cx="12" cy="12" r="3.2"/></svg>
+        <span>Intelligence</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 7 — Copy Trading">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M15.5 6a3 3 0 1 1 0 5.8M15 13.6A5.5 5.5 0 0 1 20.5 19"/></svg>
+        <span>Copy</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 8 — Bot Trading">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="8" width="14" height="10" rx="2"/><path d="M12 8V4m-6.5 9h.01M18.5 13h.01M9 15.5h6"/><circle cx="9" cy="12.5" r=".8"/><circle cx="15" cy="12.5" r=".8"/></svg>
+        <span>Bots</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 10 — Capital flows">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5 12 4l8 4.5-8 4.5Z"/><path d="m4 12.5 8 4.5 8-4.5M4 16.5 12 21l8-4.5"/></svg>
+        <span>Capital</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 10 — Activity &amp; statements">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9"/></svg>
+        <span>Activity</span></span></li>
+    </ul>
+    <div class="rail-foot">
+      <span class="rail-item soon" title="Screen group 10 — Account &amp; security">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
+        <span>Account</span></span>
+      <p class="rail-status"><span class="dot dot-demo"></span><span class="rail-status-text">Demo build</span></p>
+    </div>
+  </nav>
+
+  <div class="body-col">
+
+    <!-- TOP STRIP -->
+    <header class="topstrip">
+      <h1 class="page-title">Capital Command Center</h1>
+      <div class="spine-mini" title="Illustrative capital split — demo data">
+        <span class="spine-mini-bar" aria-hidden="true">
+          <i class="ms ms-active" style="flex:128"></i><i class="ms ms-res" style="flex:32"></i><i class="ms ms-pen" style="flex:8"></i><i class="ms ms-wd" style="flex:32"></i><i class="ms ms-un" style="flex:50"></i>
+        </span>
+        <span class="data">$25,000</span>
+      </div>
+      <div class="topstrip-right">
+        <span class="chip chip-state" id="global-trust" data-state="demo">DEMO</span>
+        <button class="kill-pill" id="kill-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v7"/><path d="M6.6 7a7 7 0 1 0 10.8 0"/></svg>
+          Kill automation
+        </button>
+        <div class="simctl">
+          <button class="simctl-btn" id="sim-btn" aria-expanded="false" aria-controls="sim-menu">Demo states ▾</button>
+          <div class="simctl-menu" id="sim-menu" hidden>
+            <p class="simctl-head">Prototype state preview</p>
+            <label><input type="checkbox" id="st-ai"> AI offline</label>
+            <label><input type="checkbox" id="st-risk"> Risk Engine unavailable</label>
+            <label><input type="checkbox" id="st-delay"> Data delayed</label>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SYSTEM BANNERS -->
+    <div class="banners" aria-live="polite">
+      <div class="banner banner-risk" id="banner-risk" hidden>
+        <strong>Risk Engine unavailable.</strong> Automated execution is blocked — fail closed. Manual trading is unaffected.
+      </div>
+      <div class="banner banner-info" id="banner-kill" hidden>
+        <strong>Automation stopped.</strong> All bot and AI trading halted. Funds and allocations untouched. Event logged to your audit trail.
+        <button class="banner-undo" id="kill-undo">Re-enable</button>
+      </div>
+    </div>
+
+    <main id="main" class="content">
+
+      <!-- ROW 1: SPINE + LENS -->
+      <section class="grid-row row-1">
+        <article class="panel spine-card" aria-labelledby="spine-h">
+          <header class="panel-head">
+            <h2 id="spine-h">Where is my capital?</h2>
+            <span class="chip chip-demo">DEMO · illustrative</span>
+          </header>
+          <p class="spine-total"><span class="spine-total-label">Total capital</span> <strong class="data data-xl">$25,000</strong>
+            <span class="asof" id="spine-asof" hidden>as of 12:01:44 · delayed +2.4s</span></p>
+          <div class="spine-bar" role="img" aria-label="Illustrative capital states: active allocation 12,800 dollars, reserved margin 3,200, settlement pending 850, withdrawable 3,150, unallocated 5,000">
+            <span class="seg ms-active" style="flex:128"><i>Active allocation</i></span>
+            <span class="seg ms-res" style="flex:32"><i>Reserved</i></span>
+            <span class="seg ms-pen" style="flex:8.5"></span>
+            <span class="seg ms-wd" style="flex:31.5"><i>Withdrawable</i></span>
+            <span class="seg ms-un" style="flex:50"><i>Unallocated</i></span>
+          </div>
+          <ul class="spine-legend">
+            <li><span class="swatch ms-active"></span>Active allocation <span class="data">$12,800</span></li>
+            <li><span class="swatch ms-res"></span>Reserved margin <span class="data">$3,200</span></li>
+            <li><span class="swatch ms-pen"></span>Settlement pending <span class="data">$850</span></li>
+            <li><span class="swatch ms-wd"></span>Withdrawable <span class="data">$3,150</span></li>
+            <li><span class="swatch ms-un"></span>Unallocated <span class="data">$5,000</span></li>
+          </ul>
+          <p class="spine-note">Unallocated capital is held apart — unreachable by AI, bots and copy strategies.</p>
+        </article>
+
+        <aside class="panel lens" id="lens-panel" aria-labelledby="lens-h">
+          <header class="panel-head">
+            <h2 id="lens-h"><img src="assets/elva-mark.png" alt="" width="18" height="15"> What ELVA sees</h2>
+            <span class="chip chip-demo">DEMO</span>
+          </header>
+          <div class="lens-body" id="lens-body">
+            <ul class="lens-list">
+              <li><span class="lens-tag">Markets</span>USD strength building ahead of Thursday's CPI print; FX ranges compressing.</li>
+              <li><span class="lens-tag tag-amber">Position</span>Your EURUSD long is 19 pips from its invalidation level (1.0840).</li>
+              <li><span class="lens-tag tag-amber">Bot</span>Momentum-7 is diverging from its backtest profile — review its health.</li>
+            </ul>
+            <p class="lens-foot">Analysis, not advice · setup confidence is never a probability of profit.</p>
+          </div>
+          <div class="lens-offline" id="lens-offline" hidden>
+            <p><strong>ELVA Intelligence is offline.</strong></p>
+            <p>Trading is unaffected. Manual trading and your positions remain fully available.</p>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ROW 2: MODE CARDS -->
+      <section aria-labelledby="modes-h" class="modes-section">
+        <div class="section-bar">
+          <h2 id="modes-h">Trading modes</h2>
+          <span class="chip chip-demo">All values DEMO</span>
+        </div>
+        <div class="mode-grid">
+          <article class="mode-card" aria-label="Manual trading">
+            <header><h3>Manual</h3><span class="mode-status st-live">Active</span></header>
+            <p class="mode-alloc"><span class="data data-lg">$10,000</span> allocated</p>
+            <p class="mode-pnl">Today <span class="data pnl-up">+$142</span></p>
+            <p class="mode-meta">2 open positions · MT5 synced ✓</p>
+          </article>
+          <article class="mode-card" aria-label="Copy trading">
+            <header><h3>Copy</h3><span class="mode-status st-live">Active</span></header>
+            <p class="mode-alloc"><span class="data data-lg">$5,000</span> allocated</p>
+            <p class="mode-pnl">Today <span class="data pnl-down">−$36</span></p>
+            <p class="mode-meta">Following Atlas FX · drift watch on</p>
+          </article>
+          <article class="mode-card mode-auto" aria-label="Bot trading" data-auto>
+            <header><h3>Bots</h3><span class="mode-status st-live mode-live">2 running</span><span class="mode-status st-halt" hidden>Halted — fail closed</span></header>
+            <p class="mode-alloc"><span class="data data-lg">$3,000</span> allocated</p>
+            <p class="mode-pnl">Today <span class="data pnl-up">+$18</span></p>
+            <p class="mode-meta">Momentum-7 ⚠ divergence · Grid-2 healthy</p>
+          </article>
+          <article class="mode-card mode-auto" aria-label="AI-assisted trading" data-auto data-ai>
+            <header><h3>AI</h3><span class="mode-status st-live mode-live">Confirm mode</span><span class="mode-status st-halt" hidden>Halted — fail closed</span><span class="mode-status st-off" hidden>Offline</span></header>
+            <p class="mode-alloc"><span class="data data-lg">$2,000</span> allocated</p>
+            <p class="mode-pnl">1 setup awaiting your confirmation</p>
+            <p class="mode-meta">Autopilot locked in this phase</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ROW 3: POSITIONS + BOUNDARIES -->
+      <section class="grid-row row-3">
+        <article class="panel" aria-labelledby="pos-h">
+          <header class="panel-head">
+            <h2 id="pos-h">Open positions</h2>
+            <span class="chip chip-state" data-trust>DEMO</span>
+          </header>
+          <table class="pos-table">
+            <thead><tr><th scope="col">Symbol</th><th scope="col">Mode</th><th scope="col">Side</th><th scope="col">Size</th><th scope="col">Entry</th><th scope="col">Mark</th><th scope="col">P&amp;L</th></tr></thead>
+            <tbody>
+              <tr>
+                <td data-l="Symbol"><strong>EURUSD</strong></td><td data-l="Mode">Manual</td><td data-l="Side">Long</td>
+                <td data-l="Size" class="num">0.50</td><td data-l="Entry" class="num">1.0872</td><td data-l="Mark" class="num">1.0901</td>
+                <td data-l="P&amp;L" class="num"><span class="pnl-up">+$145</span></td>
+              </tr>
+              <tr>
+                <td data-l="Symbol"><strong>XAUUSD</strong></td><td data-l="Mode">Manual</td><td data-l="Side">Short</td>
+                <td data-l="Size" class="num">0.10</td><td data-l="Entry" class="num">2,381.40</td><td data-l="Mark" class="num">2,384.10</td>
+                <td data-l="P&amp;L" class="num"><span class="pnl-down">−$27</span></td>
+              </tr>
+              <tr>
+                <td data-l="Symbol"><strong>US500</strong></td><td data-l="Mode">Bot · Grid-2</td><td data-l="Side">Long</td>
+                <td data-l="Size" class="num">0.20</td><td data-l="Entry" class="num">5,602.5</td><td data-l="Mark" class="num">5,604.7</td>
+                <td data-l="P&amp;L" class="num"><span class="pnl-up">+$44</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="panel-foot">All positions sync from MT5 and reconcile against the ledger continuously.</p>
+        </article>
+
+        <aside class="panel boundary" aria-labelledby="rb-h">
+          <header class="panel-head">
+            <h2 id="rb-h">Your boundaries</h2>
+            <span class="rb-tag">Risk Boundary</span>
+          </header>
+          <ul class="rb-list">
+            <li>
+              <div class="rb-row"><span>Risk per trade</span><span class="data">0.8% <em>/ 1.0%</em></span></div>
+              <div class="meter" role="img" aria-label="Risk per trade at 80 percent of limit"><i style="width:80%" class="warn"></i></div>
+            </li>
+            <li>
+              <div class="rb-row"><span>Daily loss cap</span><span class="data">$120 <em>/ $400</em></span></div>
+              <div class="meter" role="img" aria-label="Daily loss at 30 percent of cap"><i style="width:30%"></i></div>
+            </li>
+            <li>
+              <div class="rb-row"><span>Leverage</span><span class="data">6.2x <em>/ 10x</em></span></div>
+              <div class="meter" role="img" aria-label="Leverage at 62 percent of maximum"><i style="width:62%"></i></div>
+            </li>
+            <li>
+              <div class="rb-row"><span>Open positions</span><span class="data">3 <em>/ 8</em></span></div>
+              <div class="meter" role="img" aria-label="3 of 8 positions used"><i style="width:37.5%"></i></div>
+            </li>
+          </ul>
+          <p class="rb-foot">Limits are enforced by the deterministic Risk Engine — outside the AI. Changing them requires explicit re-confirmation.</p>
+        </aside>
+      </section>
+
+      <!-- ROW 4: ACTIVITY -->
+      <section class="panel activity" aria-labelledby="act-h">
+        <header class="panel-head">
+          <h2 id="act-h">Recent activity</h2>
+          <span class="chip chip-demo">DEMO</span>
+        </header>
+        <ul class="act-list">
+          <li>
+            <span class="act-what"><strong>Trade closed</strong> EURUSD +$89</span>
+            <span class="act-rec"><span class="tick">MT5 ✓</span><span class="tick">Ledger ✓</span></span>
+            <span class="act-when data">12:38</span>
+          </li>
+          <li>
+            <span class="act-what"><strong>Allocation</strong> $2,000 → AI (Confirm mode)</span>
+            <span class="act-rec"><span class="tick">Ledger ✓</span><span class="tick tick-note">Audit ✓</span></span>
+            <span class="act-when data">11:04</span>
+          </li>
+          <li>
+            <span class="act-what"><strong>Deposit</strong> 5,000 USDC credited</span>
+            <span class="act-rec"><span class="tick">Chain ✓ 12/12</span><span class="tick">Ledger ✓</span></span>
+            <span class="act-when data">09:52</span>
+          </li>
+          <li>
+            <span class="act-what"><strong>Bot permission updated</strong> Momentum-7 max daily loss → $60</span>
+            <span class="act-rec"><span class="tick tick-note">Audit ✓</span></span>
+            <span class="act-when data">09:21</span>
+          </li>
+        </ul>
+      </section>
+
+    </main>
+
+    <!-- BOTTOM TABS (mobile) -->
+    <nav class="tabbar" aria-label="Primary mobile">
+      <a class="tab active" href="#" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5.5v-5h-5v5H4Z"/></svg>Home</a>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>Trade</span>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 4v3m0 10v3m8-8h-3M7 12H4"/></svg>Intelligence</span>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5 12 4l8 4.5-8 4.5Z"/><path d="m4 12.5 8 4.5 8-4.5"/></svg>Capital</span>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/></svg>More</span>
+    </nav>
+
+  </div>
+</div>
+
+<!-- KILL SWITCH DIALOG -->
+<div class="dialog-backdrop" id="kill-dialog" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="kd-h" aria-describedby="kd-p">
+    <h2 id="kd-h">Stop all automation?</h2>
+    <p id="kd-p">This halts every bot and all AI trading immediately. It does not close positions, move capital or touch your funds — bots and AI can trade, they can never withdraw. The event is written to your audit trail.</p>
+    <label class="kd-check"><input type="checkbox" id="kd-confirm"> Stop all bot and AI trading now</label>
+    <div class="dialog-actions">
+      <button class="btn btn-ghost" id="kd-cancel">Cancel</button>
+      <button class="btn btn-danger" id="kd-go" disabled>Confirm stop</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

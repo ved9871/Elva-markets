@@ -1,5 +1,31 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · App Shell + Capital Command Center (`feature/app-shell-command-center`)
+
+**Implemented**
+- `app/`: client app shell (nav rail / top strip / mobile tab bar) + Capital Command
+  Center per Design Architecture §7.2 and `docs/specs/APP_SHELL_COMMAND_CENTER_SPEC.md`.
+- Capital Spine (full card + top-strip mini), Intelligence Lens digest, four mode
+  cards, positions table (collapses to cards ≤700px), Risk Boundary snapshot with
+  usage meters (amber ≥80% of cap), reconciled activity feed.
+- Interactive degradation states (prototype "Demo states" control): AI offline,
+  Risk Engine unavailable (fail closed — automation halted, banner), delayed data.
+- Kill switch: two-step accessible confirm; halts Bot/AI cards, funds untouched,
+  audit note; reversible in prototype.
+- Dev server config "app" on port 8766.
+
+**QA evidence**
+- Breakpoints 1440/1280/1024/768/390/375/360: no horizontal overflow (fixed
+  `[hidden]` vs display-class conflict found at 390/360), no console errors.
+- State machine exercised programmatically: AI offline/restore, Risk-down
+  halt/restore, delayed chips, kill flow (checkbox-gated confirm) — all pass.
+- Unbuilt destinations render disabled, labelled with their coming screen group.
+
+**Notes**
+- Tokens duplicated from landing CSS (no build step yet); consolidation planned.
+- Autopilot shown as "locked in this phase" on the AI card (per C2 proposal).
+
+
 ## 2026-09-30 — Phase B · Landing Page v1 (`feature/landing-page-v1`)
 
 **Implemented**
