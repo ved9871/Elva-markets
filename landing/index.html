@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELVA Markets — Global Markets. On-Chain Capital.</title>
+<meta name="description" content="ELVA Markets — a multi-asset trading platform combining professional execution, transparent capital states and explainable intelligence. Closed beta, demo environment.">
+<link rel="icon" type="image/png" href="assets/elva-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="utility-bar" role="note">
+  Trading leveraged products involves significant risk of loss.&nbsp;<span class="utility-demo">Demo environment — no client funds, all figures illustrative.</span>
+</div>
+
+<header class="nav" id="top">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="ELVA Markets home">
+      <img class="brand-mark" src="assets/elva-mark.png" alt="" width="34" height="28">
+      <span class="brand-word">ELVA<span class="brand-sub">MARKETS</span></span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="#modes">Platform</a>
+      <a href="#intelligence">Intelligence</a>
+      <a href="#capital">Capital</a>
+      <a href="#security">Security</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <span class="chip chip-demo" title="Pre-licence demonstration build">DEMO</span>
+      <a class="btn btn-primary btn-sm" href="#invite">Request invite</a>
+      <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1 · HERO -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot dot-demo"></span>Closed beta · Invite only · Demo environment</p>
+        <h1 id="hero-h">Global markets.<br><span class="grad-text">On-chain capital.</span></h1>
+        <p class="lede">ELVA Markets is a multi-asset trading platform combining professional execution, transparent capital states and explainable intelligence — with risk limits enforced by a deterministic engine, outside the AI.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#invite">Request an invite</a>
+          <a class="btn btn-ghost" href="#modes">See how it works</a>
+        </div>
+        <p class="hero-note">Funds can move on-chain. Trading executes at market speed. These are separate layers — reconciled continuously.</p>
+      </div>
+
+      <div class="hero-visual">
+        <article class="copilot-card glass" aria-label="ELVA Intelligence demonstration (illustrative)">
+          <header class="copilot-head">
+            <span class="copilot-id">
+              <img src="assets/elva-mark.png" alt="" width="22" height="18">
+              <span>ELVA&nbsp;Intelligence</span>
+            </span>
+            <span class="chip chip-demo">DEMO · illustrative</span>
+          </header>
+          <ol class="mini-rail" id="mini-rail" aria-label="Intelligence lifecycle">
+            <li>ASK</li><li>ANALYZE</li><li>CHALLENGE</li><li>BUILD</li><li>RISK&nbsp;CHECK</li>
+            <li>CONFIRM</li><li>EXECUTE</li><li>MONITOR</li><li>REVIEW</li>
+          </ol>
+          <div class="copilot-q">
+            <span class="q-label">You</span>
+            <p>What's driving EURUSD this session?</p>
+          </div>
+          <div class="copilot-a">
+            <div class="a-block a-why">
+              <p class="a-head">Why</p>
+              <p>London-open momentum with softer DXY; volatility inside normal session range.</p>
+            </div>
+            <div class="a-block a-challenge">
+              <p class="a-head">Challenge</p>
+              <p>US CPI at 16:30 GST could reverse the move; positioning looks crowded.</p>
+            </div>
+            <div class="a-block a-invalid">
+              <p class="a-head">Invalidation</p>
+              <p>A close below 1.0840 voids this setup.</p>
+            </div>
+          </div>
+          <footer class="copilot-foot">
+            <span class="conf">Setup confidence <strong class="data">64</strong></span>
+            <span class="conf-note">Model confidence in the setup — not a probability of profit.</span>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · MARKETS -->
+  <section class="markets" aria-labelledby="markets-h">
+    <div class="container">
+      <h2 id="markets-h" class="visually-hidden">Markets</h2>
+      <ul class="markets-strip reveal">
+        <li><span class="m-name">Forex</span><span class="m-sub">launch focus</span></li>
+        <li><span class="m-name">Gold &amp; Metals</span></li>
+        <li><span class="m-name">Indices</span></li>
+        <li><span class="m-name">Commodities</span></li>
+        <li><span class="m-name">Crypto</span></li>
+      </ul>
+      <p class="markets-note">Multi-asset architecture from day one. Forex-first at launch.</p>
+    </div>
+  </section>
+
+  <!-- 3 · FOUR MODES -->
+  <section class="section" id="modes" aria-labelledby="modes-h">
+    <div class="container">
+      <p class="kicker">The platform</p>
+      <h2 id="modes-h">Four ways to trade. One set of boundaries.</h2>
+      <p class="section-lede">Every mode runs inside a dedicated capital allocation you control. No mode can quietly consume capital assigned to another.</p>
+      <div class="card-grid four reveal">
+        <article class="card">
+          <h3>Manual</h3>
+          <p>Direct execution through professional trading infrastructure — MT5 at launch, ELVA terminal later.</p>
+          <p class="boundary">Available even when AI services are down.</p>
+        </article>
+        <article class="card">
+          <h3>Copy</h3>
+          <p>Follow verified strategy providers with your own allocation, risk multiplier and stop-copy conditions.</p>
+          <p class="boundary">Providers shown with verified metrics — never promotional screenshots.</p>
+        </article>
+        <article class="card">
+          <h3>Bot / Algo</h3>
+          <p>Run permitted automation and EAs inside explicit permissions, with an always-available kill switch.</p>
+          <p class="boundary">A bot can trade. A bot can never withdraw.</p>
+        </article>
+        <article class="card">
+          <h3>AI-assisted</h3>
+          <p>ELVA Intelligence analyzes, builds and challenges strategies. Execution only within permissions you grant.</p>
+          <p class="boundary">AI never controls custody and never overrides the Risk Engine.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · INTELLIGENCE -->
+  <section class="section section-alt" id="intelligence" aria-labelledby="intel-h">
+    <div class="container">
+      <p class="kicker kicker-cyan">ELVA Intelligence</p>
+      <h2 id="intel-h">An intelligence layer that argues with itself before it talks to you.</h2>
+      <p class="section-lede">Not a chatbot, not a signal seller. Every analysis carries its reasoning, its counter-case and the conditions that would prove it wrong.</p>
+
+      <div class="intel-grid reveal">
+        <ul class="module-list" aria-label="Intelligence modules">
+          <li><strong>AI Copilot</strong> — natural-language analysis and questions</li>
+          <li><strong>Market Scanner</strong> — trend, momentum, volatility, sessions, event risk</li>
+          <li><strong>Strategy Engine</strong> — structured setups from approved strategy families</li>
+          <li><strong>Challenge Layer</strong> — counter-case and invalidation before execution</li>
+          <li><strong>Risk Guardian</strong> — deterministic limit checks on every proposal</li>
+          <li><strong>Portfolio Doctor</strong> — concentration, leverage and behavior review</li>
+          <li><strong>Copy Intelligence</strong> — provider behavior, not verdicts</li>
+          <li><strong>Bot Inspector</strong> — bot history, regimes and failure modes</li>
+          <li><strong>Position Monitor</strong> — is the original thesis still valid?</li>
+          <li><strong>Post-Trade Review</strong> — a structured journal that learns with you</li>
+        </ul>
+        <aside class="explain-card glass" aria-label="Explainability standard">
+          <h3>Every setup must answer</h3>
+          <ul>
+            <li>Why this setup?</li>
+            <li>What could go wrong?</li>
+            <li>What invalidates it?</li>
+            <li>What changed since the analysis?</li>
+            <li>Which risk rules apply to this account?</li>
+          </ul>
+          <p class="conf-note">A confidence score, where shown, is model confidence in the setup — never a probability of profit.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · LIFECYCLE -->
+  <section class="section" id="lifecycle" aria-labelledby="cycle-h">
+    <div class="container">
+      <p class="kicker kicker-cyan">The lifecycle</p>
+      <h2 id="cycle-h">Nine steps. No shortcuts.</h2>
+      <ol class="rail reveal" aria-label="Nine-step intelligence lifecycle">
+        <li><span class="rail-n">1</span><h3>Ask</h3><p>You start with a question or a goal.</p></li>
+        <li><span class="rail-n">2</span><h3>Analyze</h3><p>Markets, context and your account state.</p></li>
+        <li><span class="rail-n">3</span><h3>Challenge</h3><p>The counter-case is built before the trade.</p></li>
+        <li><span class="rail-n">4</span><h3>Build</h3><p>A structured setup: entry, stop, size, horizon.</p></li>
+        <li class="rail-risk"><span class="rail-n">5</span><h3>Risk check</h3><p>Deterministic limits — outside the AI.</p></li>
+        <li><span class="rail-n">6</span><h3>Confirm</h3><p>You approve. Nothing executes without permission.</p></li>
+        <li><span class="rail-n">7</span><h3>Execute</h3><p>Professional infrastructure, market speed.</p></li>
+        <li><span class="rail-n">8</span><h3>Monitor</h3><p>Thesis validity and invalidation watch.</p></li>
+        <li><span class="rail-n">9</span><h3>Review</h3><p>A journal entry, not just a closed ticket.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6 · CAPITAL -->
+  <section class="section section-alt" id="capital" aria-labelledby="capital-h">
+    <div class="container">
+      <p class="kicker">Transparent Capital Layer</p>
+      <h2 id="capital-h">&ldquo;Where is my capital?&rdquo; should never need a support ticket.</h2>
+      <p class="section-lede">Capital is always in an explicit, named state — allocated by you, per trading mode. Never one ambiguous balance.</p>
+
+      <figure class="spine glass reveal" aria-label="Illustrative capital allocation">
+        <figcaption class="spine-head">
+          <span>Total capital <strong class="data data-lg">$25,000</strong></span>
+          <span class="chip chip-demo">DEMO · illustrative</span>
+        </figcaption>
+        <div class="spine-bar" role="img" aria-label="Illustrative allocation: Manual trading 10,000 dollars, Copy 5,000, Bot 3,000, AI 2,000, Unallocated 5,000">
+          <span class="seg seg-manual" style="flex:10"><i>Manual</i></span>
+          <span class="seg seg-copy" style="flex:5"><i>Copy</i></span>
+          <span class="seg seg-bot" style="flex:3"><i>Bot</i></span>
+          <span class="seg seg-ai" style="flex:2"><i>AI</i></span>
+          <span class="seg seg-un" style="flex:5"><i>Unallocated</i></span>
+        </div>
+        <ul class="spine-legend">
+          <li><span class="swatch sw-manual"></span>Manual <span class="data">$10,000</span></li>
+          <li><span class="swatch sw-copy"></span>Copy <span class="data">$5,000</span></li>
+          <li><span class="swatch sw-bot"></span>Bot <span class="data">$3,000</span></li>
+          <li><span class="swatch sw-ai"></span>AI <span class="data">$2,000</span></li>
+          <li><span class="swatch sw-un"></span>Unallocated <span class="data">$5,000</span></li>
+        </ul>
+      </figure>
+
+      <div class="state-grid reveal">
+        <div class="state"><h3>Total Capital</h3><p>Everything recognized for you, across all states.</p></div>
+        <div class="state"><h3>Trading Allocation</h3><p>Capital you deliberately assign to a trading mode.</p></div>
+        <div class="state"><h3>Reserved Margin</h3><p>Held against your current trading obligations.</p></div>
+        <div class="state"><h3>Settlement Pending</h3><p>Realized results awaiting reconciliation.</p></div>
+        <div class="state"><h3>Withdrawable</h3><p>Eligible to leave the platform right now.</p></div>
+        <div class="state"><h3>Unallocated</h3><p>Yours, held apart — unreachable by AI and bots.</p></div>
+      </div>
+      <p class="fine-note">Allocation is a risk boundary, not a guarantee. In extreme conditions — gaps, slippage, liquidation mechanics — losses can exceed intended limits.</p>
+    </div>
+  </section>
+
+  <!-- 7 · EXECUTION -->
+  <section class="section" id="execution" aria-labelledby="exec-h">
+    <div class="container">
+      <p class="kicker">Execution &amp; liquidity</p>
+      <h2 id="exec-h">On-chain capital. Off-chain speed. Reconciled, continuously.</h2>
+      <div class="exec-grid reveal">
+        <article class="card">
+          <h3>Capital layer</h3>
+          <p>Supported stablecoin deposits and withdrawals move on-chain and are credited to an internal double-entry ledger — the accounting source of truth.</p>
+        </article>
+        <article class="card">
+          <h3>Execution layer</h3>
+          <p>Orders execute in professional low-latency infrastructure (MT5 at launch). Trades are never on-chain transactions, and we will never tell you otherwise.</p>
+        </article>
+        <article class="card">
+          <h3>Reconciliation</h3>
+          <p>Blockchain records, execution records and the ledger reconcile continuously. Three systems, one consistent answer.</p>
+        </article>
+      </div>
+      <p class="roadmap-line">On the roadmap: multi-LP aggregation, smart routing and execution-quality analytics — the ELVA Liquidity OS.</p>
+    </div>
+  </section>
+
+  <!-- 8 · SECURITY -->
+  <section class="section section-alt" id="security" aria-labelledby="sec-h">
+    <div class="container">
+      <p class="kicker">Security &amp; control</p>
+      <h2 id="sec-h">Permissions are architecture, not settings.</h2>
+      <p class="section-lede">What automation may do is configurable. What it may never do is not a toggle.</p>
+
+      <div class="perm-wrap reveal">
+        <table class="perm-table" aria-label="Automation permission model (excerpt)">
+          <thead>
+            <tr><th scope="col">Action</th><th scope="col">AI / Bots</th><th scope="col">Controlled by</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Analyze markets, build &amp; challenge strategies</td><td class="ok">Allowed</td><td>—</td></tr>
+            <tr><td>Open, modify or close trades</td><td class="cond">Only within granted permissions</td><td>Risk Engine + your limits</td></tr>
+            <tr class="locked"><td>Withdraw funds</td><td><span class="lock" aria-hidden="true">🔒</span> Never</td><td>Your custody controls only</td></tr>
+            <tr class="locked"><td>Change wallets or security settings</td><td><span class="lock" aria-hidden="true">🔒</span> Never</td><td>Your security controls</td></tr>
+            <tr class="locked"><td>Increase their own capital allocation</td><td><span class="lock" aria-hidden="true">🔒</span> Never</td><td>You</td></tr>
+            <tr class="locked"><td>Override the Risk Engine</td><td><span class="lock" aria-hidden="true">🔒</span> Never</td><td>Not permitted — by design</td></tr>
+          </tbody>
+        </table>
+        <div class="sec-cards">
+          <article class="card card-risk">
+            <h3>Deterministic Risk Engine</h3>
+            <p>Every automated action passes hard, rule-based limits enforced outside the language model. If the Risk Engine is unavailable, automated execution fails closed — it stops.</p>
+          </article>
+          <article class="card card-risk">
+            <h3>Kill switch</h3>
+            <p>One control stops all automation instantly. It halts trading. It never touches your funds.</p>
+          </article>
+          <article class="card card-risk">
+            <h3>Audited actions</h3>
+            <p>Deposits, withdrawals, permission changes and automated executions are logged — visible to you.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · PARTNERS -->
+  <section class="section" id="partners" aria-labelledby="partners-h">
+    <div class="container partners-inner reveal">
+      <p class="kicker">Institutional direction</p>
+      <h2 id="partners-h">Built as infrastructure, not just an app.</h2>
+      <p class="section-lede">The same core that powers ELVA — ledger, risk, reconciliation, intelligence — is designed to support introducing brokers, institutional API access and brokerage-as-a-service over time. If that roadmap is relevant to you, we'd like to talk.</p>
+      <a class="btn btn-ghost" href="#invite">Start a conversation</a>
+    </div>
+  </section>
+
+  <!-- 10 · FAQ -->
+  <section class="section section-alt" id="faq" aria-labelledby="faq-h">
+    <div class="container faq-inner">
+      <p class="kicker">FAQ</p>
+      <h2 id="faq-h">Straight answers.</h2>
+      <details>
+        <summary>Is ELVA live? Can I deposit?</summary>
+        <p>No. ELVA is in a closed, invite-only beta and runs as a demonstration environment. It does not accept deposits, does not hold client money and does not provide investment services or advice.</p>
+      </details>
+      <details>
+        <summary>Are my trades on the blockchain?</summary>
+        <p>No. Supported capital movements (deposits, withdrawals, settlement) can be on-chain. Trading executes in professional off-chain infrastructure — MT5 at launch. The two layers are reconciled continuously, and we never present one as the other.</p>
+      </details>
+      <details>
+        <summary>Can the AI withdraw or move my funds?</summary>
+        <p>Never. AI and bots have no withdrawal path by architecture — it is not a setting that can be switched on. Withdrawals require your custody controls and security verification.</p>
+      </details>
+      <details>
+        <summary>What happens if the AI goes down?</summary>
+        <p>Manual trading continues unaffected. ELVA Intelligence is a layer on top of the platform, not a dependency of it.</p>
+      </details>
+      <details>
+        <summary>What happens if the Risk Engine goes down?</summary>
+        <p>Automated execution stops — it fails closed. Analysis remains available and manual trading is unaffected.</p>
+      </details>
+      <details>
+        <summary>Does the AI predict profits?</summary>
+        <p>No. ELVA Intelligence explains setups, builds counter-cases and defines invalidation conditions. Any confidence score is model confidence in the setup — not a probability of profit. Trading involves significant risk of loss.</p>
+      </details>
+      <details>
+        <summary>Who can join the beta?</summary>
+        <p>Access is invite-only and subject to eligibility checks, including nationality and residence restrictions. Some jurisdictions cannot be served.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- RISK DISCLOSURE -->
+  <section class="risk-block" id="risk" aria-labelledby="risk-h">
+    <div class="container">
+      <h2 id="risk-h">Risk disclosure</h2>
+      <p>Trading leveraged products such as foreign exchange and CFDs involves significant risk and is not suitable for everyone. Losses can exceed intended limits under gaps, slippage and liquidation mechanics. Nothing on this page is investment advice, an offer of financial services, or a solicitation to trade. ELVA Markets is currently a demonstration environment: it does not accept deposits, does not execute real trades and does not hold client funds. All figures, analyses and interfaces shown are illustrative demo content, labelled as such.</p>
+    </div>
+  </section>
+
+  <!-- INVITE -->
+  <section class="section invite" id="invite" aria-labelledby="invite-h">
+    <div class="container invite-inner glass reveal">
+      <div>
+        <h2 id="invite-h">Request an invite</h2>
+        <p>The closed beta opens in stages. Tell us where to reach you and we'll be in touch when a seat opens.</p>
+      </div>
+      <form class="invite-form" id="invite-form" novalidate>
+        <label class="visually-hidden" for="invite-email">Email address</label>
+        <input type="email" id="invite-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+        <button class="btn btn-primary" type="submit">Request invite</button>
+        <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/elva-mark.png" alt="ELVA Markets" width="56" height="46">
+        <div class="lockup">
+          <span class="lockup-elva">ELVA</span>
+          <span class="lockup-markets">MARKETS</span>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#modes">Platform</a>
+        <a href="#intelligence">Intelligence</a>
+        <a href="#capital">Capital</a>
+        <a href="#security">Security</a>
+        <a href="#risk">Risk disclosure</a>
+      </nav>
+    </div>
+    <!-- Group-relationship line intentionally withheld pending approval (Design Architecture C1) -->
+    <div class="footer-legal">
+      <p>© 2026 ELVA Markets. All rights reserved.</p>
+      <p>Demonstration environment. No client funds. All figures illustrative and labelled as demo content. Access is invite-only and subject to eligibility and jurisdiction restrictions.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
