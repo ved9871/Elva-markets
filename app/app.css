@@ -1,17 +1,7 @@
 /* ELVA Markets — App Shell + Capital Command Center · tokens per Design Architecture v1.0 §3 */
 
 :root {
-  --navy-950: #04070F; --navy-900: #070D1B; --navy-850: #0A1424; --navy-800: #0F1D33;
-  --navy-700: #16273F; --line-500: #24385C;
-  --blue-500: #2B66FF; --blue-400: #5A8AFF;
-  --cyan-400: #2FC1F5; --cyan-300: #7ADCFF;
-  --frost-50: #F2F6FC; --frost-200: #D7E0EE;
-  --silver-400: #8FA2BF; --silver-600: #5F7294;
-  --green-400: #2FCF9A; --amber-400: #E8A93D; --red-400: #E8545B; --violet-400: #9B8CFF;
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-data: "IBM Plex Mono", monospace;
-  --r-chip: 6px; --r-btn: 8px; --r-card: 12px; --r-panel: 16px;
+  /* page-scope vars only — design tokens live in tokens.css (synced from assets/tokens.css) */
   --rail-w: 220px; --top-h: 60px;
 }
 

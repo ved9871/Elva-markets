@@ -1,0 +1,49 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ELVA Design System v1.0 — canonical design tokens
+   Source of truth: this file (assets/tokens.css).
+   landing/tokens.css and app/tokens.css are COPIES kept in sync by
+   scripts/sync_tokens.py — edit here, then run the sync. CI/QA can run
+   `python scripts/sync_tokens.py --check` to detect drift.
+   Values per docs/ELVA_DESIGN_ARCHITECTURE_v1.md §3.2–3.4.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* primitives — anchored to the approved logo gradient */
+  --navy-950: #04070F;   /* void */
+  --navy-900: #070D1B;   /* canvas */
+  --navy-850: #0A1424;   /* surface */
+  --navy-800: #0F1D33;   /* raised */
+  --navy-700: #16273F;   /* interactive */
+  --navy-600: #1F3352;   /* border strong */
+  --line-500: #24385C;   /* border */
+
+  --blue-600: #1E4FD8;
+  --blue-500: #2B66FF;   /* Electric Blue — logo mid */
+  --blue-400: #5A8AFF;
+  --cyan-400: #2FC1F5;   /* Intelligence Cyan — logo tip */
+  --cyan-300: #7ADCFF;
+  --ink-700:  #0E2B66;   /* logo deep navy — light surfaces only */
+
+  --frost-50:  #F2F6FC;  /* text primary */
+  --frost-200: #D7E0EE;
+  --silver-400: #8FA2BF; /* text secondary */
+  --silver-600: #5F7294; /* text muted */
+
+  /* status — green pass/healthy only · amber attention only ·
+     red genuine risk/error only · violet DEMO marking only */
+  --green-400:  #2FCF9A;
+  --amber-400:  #E8A93D;
+  --red-400:    #E8545B;
+  --violet-400: #9B8CFF;
+
+  /* typography */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-data: "IBM Plex Mono", monospace;
+
+  /* radii */
+  --r-chip: 6px;
+  --r-btn: 8px;
+  --r-card: 12px;
+  --r-panel: 16px;
+}
