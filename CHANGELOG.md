@@ -1,5 +1,34 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · Strategy Detail (`feature/strategy-detail`)
+
+**Implemented**
+- `app/strategy.html|strategy.css|strategy.js` per Design Architecture §7.5 and
+  `docs/specs/STRATEGY_DETAIL_SPEC.md`; two demo strategies via `?s=` param
+  (EURUSD Breakout @ CHALLENGE, XAUUSD Mean Reversion @ MONITOR), unknown ids
+  fall back safely.
+- Three-column argument: WHY (cyan, thesis + data rows + freshness), CHALLENGE
+  (amber, visually adversarial offset, never collapsed on desktop/tablet),
+  INVALIDATION (red, each condition tagged "monitored").
+- "What changed since this analysis" strip; proposed-plan table with Risk
+  Boundary caps inline; allocation-context line (unallocated unreachable).
+- Risk Engine panel: Run Risk Check → rule-by-rule deterministic verdict table
+  with engine version/time stamp; XAUUSD variant shows a near-cap amber
+  ATTENTION row; Risk-Engine-down returns a red "no verdict — fail closed"
+  block; **Confirm & execute stays disabled, labelled for screen group 6**.
+- Position Monitor panel (Lens voice) with AI-offline degradation: analysis
+  stays readable but marked STALE/frozen via banner; monitoring paused copy.
+- Mobile: WHY/INVALIDATION collapse behind header toggles, CHALLENGE open by
+  default (per §8 responsive table); resize + matchMedia both drive it.
+- Intelligence Home active-work cards now link to strategy detail.
+
+**QA evidence**
+- No horizontal overflow at 1440/1280/1024/768/390/375/360; no console errors.
+- Programmatic tests pass: mobile accordion defaults + toggles, verdict render
+  (5 PASS rows), REU no-verdict and restore, frozen/STALE state and restore,
+  confirm gating, both strategies + lifecycle dots (8 lit on MONITOR variant).
+
+
 ## 2026-09-30 — Phase B · ELVA Intelligence Home (`feature/intelligence-home`)
 
 **Implemented**
