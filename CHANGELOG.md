@@ -1,5 +1,18 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · Mobile Variants Pass (`feature/mobile-pass`)
+
+- Full-surface mobile audit of all 14 pages at 390/360 per
+  `docs/specs/MOBILE_PASS_SPEC.md`; results in `docs/qa/MOBILE_QA_REPORT.md`.
+- Baseline: zero overflow and zero console errors everywhere; findings were
+  3 focus-zoom inputs and systematic sub-44px touch targets.
+- Fixes: mobile compliance layer in `app.css` (44px primary/segmented
+  controls, padded inline action links and toggles, 16px !important on all
+  text-entry controls) + landing input/link/summary fixes.
+- Post-fix: touch-target and focus-zoom audits clean on re-swept pages;
+  desktop verified untouched (media-gated). Accepted deviations documented.
+
+
 ## 2026-09-30 — Phase B · Capital + Security (`feature/capital-security`)
 
 **Implemented**
