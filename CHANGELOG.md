@@ -1,5 +1,44 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · Admin / Operations Console (`feature/ops-console`)
+
+**Implemented — final Phase B screen group (12 of 12)**
+- `app/ops.html|ops.css|ops.js` per `docs/specs/OPS_CONSOLE_SPEC.md` and C10:
+  same tokens, denser console template ("ELVA OPS · INTERNAL"), deliberately
+  not linked from the client app. Seven sections behind a switcher.
+- **Overview:** ops tiles + open-flags list (recon exception, bot drift;
+  REU raises a platform flag).
+- **Users & KYC:** masked queue with geo-policy enforced in the UI — US
+  person auto-blocked with no approve action, EU held unless licensed;
+  approve/reject log reviewer + decision (simulated).
+- **Reconciliation:** chain vs ledger vs MT5 per scope with deltas, one amber
+  "investigating — entry hold applied" exception row, simulated re-run.
+- **Risk Engine (view-only):** status, enforcement counters, verdict feed
+  (PASS/BLOCK with rule); shared REU toggle → DOWN, feed paused, fail-closed
+  notice; "rule changes route through founder approval + change control".
+- **Automation:** platform counts; platform kill reuses the two-step dialog
+  (operator-identity logging noted); REU and kill both zero the counts and
+  mirror on Overview and Health; funds-untouched invariant restated.
+- **Audit explorer:** 10-event demo set, type filters + search composing,
+  honest empty state.
+- **Health:** service list wired to the demo-state switcher (market data ↔
+  DELAYED, Risk Engine ↔ DOWN, AI ↔ OFFLINE, automation ↔ HALTED) + the
+  degradation contract in writing.
+
+**QA evidence**
+- No horizontal overflow at 1440/768/390/360; tables collapse via data-label
+  pattern on mobile. No console errors from the page (two logged errors were
+  residue of a QA diagnostic cross-origin fetch from the prior session, not
+  ops.html — verified by source inspection).
+- Programmatic tests pass: section switching, KYC approve + blocked-row
+  non-action, engine DOWN/recover with feed pause, health chips for all four
+  states, platform kill → zeroed counts → restore, audit filter/search
+  composition incl. empty state.
+
+**Phase B status: all 12 screen groups of the approved implementation order
+are built, QA'd and merged.**
+
+
 ## 2026-09-30 — Phase B · Mobile Variants Pass (`feature/mobile-pass`)
 
 - Full-surface mobile audit of all 14 pages at 390/360 per

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELVA OPS — Operations Console</title>
+<meta name="description" content="ELVA Markets internal operations console prototype. Demo environment, all figures illustrative.">
+<link rel="icon" type="image/png" href="assets/elva-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="ops.css">
+</head>
+<body class="ops-body">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- CONSOLE TOP BAR -->
+<header class="ops-bar">
+  <div class="ops-id">
+    <img src="assets/elva-mark.png" alt="" width="24" height="20">
+    <span class="ops-word">ELVA <em>OPS</em></span>
+    <span class="chip chip-internal">INTERNAL</span>
+    <span class="chip chip-state" id="global-trust" data-state="demo">DEMO</span>
+    <span class="asof" id="spine-asof" hidden>delayed +2.4s</span>
+  </div>
+  <div class="topstrip-right">
+    <button class="kill-pill" id="kill-btn">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v7"/><path d="M6.6 7a7 7 0 1 0 10.8 0"/></svg>
+      Platform kill
+    </button>
+    <div class="simctl">
+      <button class="simctl-btn" id="sim-btn" aria-expanded="false" aria-controls="sim-menu">Demo states ▾</button>
+      <div class="simctl-menu" id="sim-menu" hidden>
+        <p class="simctl-head">Prototype state preview</p>
+        <label><input type="checkbox" id="st-ai"> AI offline</label>
+        <label><input type="checkbox" id="st-risk"> Risk Engine unavailable</label>
+        <label><input type="checkbox" id="st-delay"> Data delayed</label>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="banners" aria-live="polite">
+  <div class="banner banner-risk" id="banner-risk" hidden>
+    <strong>Risk Engine unavailable.</strong> Automated execution platform-wide is blocked — fail closed. Manual trading and withdrawals are unaffected.
+  </div>
+  <div class="banner banner-info" id="banner-kill" hidden>
+    <strong>Platform automation stopped.</strong> All bot, AI and copy trading halted for all accounts. Funds and allocations untouched. Event logged.
+    <button class="banner-undo" id="kill-undo">Re-enable</button>
+  </div>
+</div>
+
+<!-- SECTION SWITCHER -->
+<nav class="ops-nav" aria-label="Console sections">
+  <button class="onav active" data-s="overview" aria-pressed="true">Overview</button>
+  <button class="onav" data-s="kyc" aria-pressed="false">Users &amp; KYC</button>
+  <button class="onav" data-s="recon" aria-pressed="false">Reconciliation</button>
+  <button class="onav" data-s="risk" aria-pressed="false">Risk Engine</button>
+  <button class="onav" data-s="auto" aria-pressed="false">Automation</button>
+  <button class="onav" data-s="audit" aria-pressed="false">Audit</button>
+  <button class="onav" data-s="health" aria-pressed="false">Health</button>
+</nav>
+
+<main id="main" class="ops">
+
+  <!-- OVERVIEW -->
+  <section class="osec" id="s-overview">
+    <div class="tile-row">
+      <div class="tile"><span class="tile-k">Clients</span><span class="tile-v data">142</span><span class="tile-s">invite-only beta</span></div>
+      <div class="tile"><span class="tile-k">Deposits today</span><span class="tile-v data">$38,400</span><span class="tile-s">9 transfers · all credited</span></div>
+      <div class="tile"><span class="tile-k">Withdrawals pending</span><span class="tile-v data">2</span><span class="tile-s">security review queue</span></div>
+      <div class="tile"><span class="tile-k">KYC queue</span><span class="tile-v data">4</span><span class="tile-s">1 auto-blocked (geo)</span></div>
+      <div class="tile" id="tile-recon"><span class="tile-k">Reconciliation</span><span class="tile-v ok-txt">3-way ✓</span><span class="tile-s">last run 13:20:04</span></div>
+      <div class="tile" id="tile-auto"><span class="tile-k">Automation</span><span class="tile-v data" id="auto-count">61 running</span><span class="tile-s" id="auto-sub">38 bots · 19 copy · 4 AI</span></div>
+    </div>
+    <div class="panel oflags">
+      <header class="panel-head"><h3>Open flags</h3><span class="chip chip-demo">DEMO</span></header>
+      <ul class="flag-list" id="flag-list">
+        <li><span class="sev sev-amber">⚠</span> Recon scope <span class="data">ACC-1094 / USDT</span> — $12.40 delta under investigation; entry hold applied.</li>
+        <li><span class="sev sev-amber">⚠</span> Bot <span class="data">Momentum-7 (ACC-1007)</span> — backtest divergence day 3 of 7 drift watch.</li>
+        <li id="flag-risk" hidden><span class="sev sev-red">●</span> Risk Engine unavailable — automated execution fail-closed platform-wide.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- KYC -->
+  <section class="osec" id="s-kyc" hidden>
+    <div class="panel">
+      <header class="panel-head"><h3>KYC review queue</h3><span class="chip chip-demo">DEMO · identities masked</span></header>
+      <p class="ops-note">Geo-policy enforced at verification, not by IP: US persons blocked entirely; EU/UK held unless licensed there. Blocked rows cannot be approved — policy, not preference.</p>
+      <table class="otable">
+        <thead><tr><th scope="col">Applicant</th><th scope="col">Region</th><th scope="col">Checks</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead>
+        <tbody id="kyc-body">
+          <tr data-id="APL-0417"><td data-l="Applicant"><strong>A. R—</strong> <span class="data oid">APL-0417</span></td><td data-l="Region">UAE</td><td data-l="Checks">ID ✓ · liveness ✓ · sanctions ✓</td><td data-l="Status" class="k-status">Pending review</td><td data-l="Action" class="k-act"><button class="btn-o ok" data-a="approve">Approve</button><button class="btn-o no" data-a="reject">Reject</button></td></tr>
+          <tr data-id="APL-0418"><td data-l="Applicant"><strong>S. K—</strong> <span class="data oid">APL-0418</span></td><td data-l="Region">KSA</td><td data-l="Checks">ID ✓ · liveness ✓ · sanctions ✓</td><td data-l="Status" class="k-status">Pending review</td><td data-l="Action" class="k-act"><button class="btn-o ok" data-a="approve">Approve</button><button class="btn-o no" data-a="reject">Reject</button></td></tr>
+          <tr data-id="APL-0419" class="row-blocked"><td data-l="Applicant"><strong>J. M—</strong> <span class="data oid">APL-0419</span></td><td data-l="Region">USA</td><td data-l="Checks">ID ✓ · nationality: US person</td><td data-l="Status" class="k-status blocked-txt">Blocked — geo-policy</td><td data-l="Action" class="k-act"><span class="oid">No action available</span></td></tr>
+          <tr data-id="APL-0420"><td data-l="Applicant"><strong>L. B—</strong> <span class="data oid">APL-0420</span></td><td data-l="Region">DEU</td><td data-l="Checks">ID ✓ · liveness ✓</td><td data-l="Status" class="k-status held-txt">Held — EU (unlicensed)</td><td data-l="Action" class="k-act"><span class="oid">Held by policy</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- RECONCILIATION -->
+  <section class="osec" id="s-recon" hidden>
+    <div class="panel">
+      <header class="panel-head">
+        <h3>Three-record reconciliation</h3>
+        <div class="ops-head-right">
+          <span class="oid" id="recon-ts">last run 13:20:04 GST</span>
+          <button class="btn-o" id="recon-run">Run now</button>
+        </div>
+      </header>
+      <p class="ops-note">Blockchain is authoritative for on-chain transfers, MT5 for executions, the internal double-entry ledger for consolidated obligations. They must agree — continuously.</p>
+      <table class="otable">
+        <thead><tr><th scope="col">Scope</th><th scope="col">Chain</th><th scope="col">Ledger</th><th scope="col">MT5</th><th scope="col">Δ</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Scope">Platform USDC</td><td data-l="Chain" class="num">1,204,310</td><td data-l="Ledger" class="num">1,204,310</td><td data-l="MT5" class="num">—</td><td data-l="Δ" class="num">0.00</td><td data-l="Status" class="ok-txt">✓ reconciled</td></tr>
+          <tr><td data-l="Scope">Client equity vs MT5</td><td data-l="Chain" class="num">—</td><td data-l="Ledger" class="num">986,240</td><td data-l="MT5" class="num">986,240</td><td data-l="Δ" class="num">0.00</td><td data-l="Status" class="ok-txt">✓ reconciled</td></tr>
+          <tr class="row-warn"><td data-l="Scope">ACC-1094 / USDT</td><td data-l="Chain" class="num">18,412.40</td><td data-l="Ledger" class="num">18,400.00</td><td data-l="MT5" class="num">—</td><td data-l="Δ" class="num held-txt">12.40</td><td data-l="Status" class="held-txt">⚠ investigating — entry hold applied</td></tr>
+          <tr><td data-l="Scope">P&amp;L postings (24h)</td><td data-l="Chain" class="num">—</td><td data-l="Ledger" class="num">412 entries</td><td data-l="MT5" class="num">412 fills</td><td data-l="Δ" class="num">0</td><td data-l="Status" class="ok-txt">✓ reconciled</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- RISK ENGINE -->
+  <section class="osec" id="s-risk" hidden>
+    <div class="ops-2col">
+      <div class="panel" id="re-panel">
+        <header class="panel-head"><h3>Risk Engine</h3><span class="mode-status st-live" id="re-status">UP · v2.1</span></header>
+        <ul class="bd-list">
+          <li><span>Mode</span><span class="data">Deterministic · outside the AI</span></li>
+          <li><span>Uptime (30d)</span><span class="data">99.98%</span></li>
+          <li><span>Median verdict latency</span><span class="data">4 ms</span></li>
+          <li><span>Checks today</span><span class="data">1,412</span></li>
+          <li><span>Blocked today</span><span class="data">23</span></li>
+        </ul>
+        <p class="ops-note" id="re-note">View-only console. Rule changes are never made here — they route through founder approval and change control.</p>
+        <p class="cfg-err" id="re-down" hidden><strong>ENGINE DOWN.</strong> Automated execution fail-closed platform-wide. Manual trading and withdrawals unaffected. Verdict feed paused.</p>
+      </div>
+      <div class="panel">
+        <header class="panel-head"><h3>Verdict feed</h3><span class="chip chip-demo">DEMO</span></header>
+        <ul class="feed" id="re-feed">
+          <li><span class="ok-txt">PASS</span><span class="feed-w">ACC-1021 · AI · Buy 0.20 EURUSD — risk 0.35% ≤ 1.0%</span><span class="oid">13:21:44</span></li>
+          <li><span class="blocked-txt">BLOCK</span><span class="feed-w">ACC-1088 · Bot · risk/trade 1.4% &gt; 1.0% cap</span><span class="oid">13:21:12</span></li>
+          <li><span class="ok-txt">PASS</span><span class="feed-w">ACC-1042 · Copy · size within multiplier bounds</span><span class="oid">13:20:58</span></li>
+          <li><span class="blocked-txt">BLOCK</span><span class="feed-w">ACC-1007 · Bot · max positions 4 &gt; 3 permitted</span><span class="oid">13:20:31</span></li>
+          <li><span class="ok-txt">PASS</span><span class="feed-w">ACC-1113 · Manual-assist · leverage 6x ≤ 10x</span><span class="oid">13:19:57</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTOMATION -->
+  <section class="osec" id="s-auto" hidden>
+    <div class="panel">
+      <header class="panel-head"><h3>Automation controls</h3><span class="rb-tag">Platform</span></header>
+      <div class="tile-row tile-row-3">
+        <div class="tile"><span class="tile-k">Bots running</span><span class="tile-v data" id="ac-bots">38</span></div>
+        <div class="tile"><span class="tile-k">Copy relationships</span><span class="tile-v data" id="ac-copy">19</span></div>
+        <div class="tile"><span class="tile-k">AI Confirm accounts</span><span class="tile-v data" id="ac-ai">4</span></div>
+      </div>
+      <p class="ops-note">The platform kill switch halts every bot, copy relationship and AI execution for all accounts at once. It never closes positions, never moves capital, never touches funds — automation can trade; it can never withdraw. Every use is audited.</p>
+      <p class="cfg-err" id="ac-halted" hidden><strong>HALTED.</strong> Platform automation is stopped. Re-enable from the banner above.</p>
+      <div class="step-actions" style="max-width:360px">
+        <button class="btn btn-danger" id="ac-kill">Platform kill — stop all automation</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIT -->
+  <section class="osec" id="s-audit" hidden>
+    <div class="panel">
+      <header class="panel-head">
+        <h3>Audit explorer</h3>
+        <div class="ops-head-right">
+          <label class="visually-hidden" for="au-q">Search audit</label>
+          <input type="search" id="au-q" class="au-search" placeholder="Search ref, account, event…">
+        </div>
+      </header>
+      <div class="f-group" role="group" aria-label="Filter audit events">
+        <button class="fseg active" data-f="all" aria-pressed="true">All</button>
+        <button class="fseg" data-f="auth" aria-pressed="false">Auth</button>
+        <button class="fseg" data-f="permission" aria-pressed="false">Permissions</button>
+        <button class="fseg" data-f="execution" aria-pressed="false">Execution</button>
+        <button class="fseg" data-f="custody" aria-pressed="false">Custody</button>
+        <button class="fseg" data-f="admin" aria-pressed="false">Admin</button>
+      </div>
+      <table class="otable">
+        <thead><tr><th scope="col">Time</th><th scope="col">Type</th><th scope="col">Actor</th><th scope="col">Event</th><th scope="col">Ref</th></tr></thead>
+        <tbody id="au-body"></tbody>
+      </table>
+      <p class="ops-note" id="au-empty" hidden>No audit events match this filter/search (demo dataset).</p>
+    </div>
+  </section>
+
+  <!-- HEALTH -->
+  <section class="osec" id="s-health" hidden>
+    <div class="panel">
+      <header class="panel-head"><h3>System health · trust states</h3><span class="chip chip-demo">DEMO</span></header>
+      <ul class="health-list">
+        <li><span>Market data feed</span><span class="hchip h-ok" id="h-md">LIVE</span></li>
+        <li><span>Risk Engine</span><span class="hchip h-ok" id="h-re">UP · deterministic</span></li>
+        <li><span>ELVA Intelligence</span><span class="hchip h-ok" id="h-ai">UP · analysis + confirm</span></li>
+        <li><span>Chain watcher</span><span class="hchip h-ok">UP · 12-conf policy</span></li>
+        <li><span>MT5 bridge</span><span class="hchip h-ok">UP · sync 1.2s</span></li>
+        <li><span>Internal ledger</span><span class="hchip h-ok">UP · balanced</span></li>
+        <li><span>Automation</span><span class="hchip h-ok" id="h-auto">RUNNING · 61 units</span></li>
+      </ul>
+      <p class="ops-note">Degradation contract: AI down → manual unaffected. Risk Engine down → automation fail-closed. Data delayed → trust chips flip client-side. Custody flows never depend on any of the above.</p>
+    </div>
+  </section>
+
+  <p class="intel-disclaimer">Internal operations console — demo environment. All accounts, figures, applicants and events are illustrative. Product rules are view-only here; changes route through founder approval and change control.</p>
+
+  <div id="lens-body" hidden aria-hidden="true"></div>
+  <div id="lens-offline" hidden aria-hidden="true"></div>
+</main>
+
+<div class="toast" id="ops-toast" role="status" aria-live="polite" hidden></div>
+
+<div class="dialog-backdrop" id="kill-dialog" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="kd-h" aria-describedby="kd-p">
+    <h2 id="kd-h">Stop ALL platform automation?</h2>
+    <p id="kd-p">This halts every bot, copy relationship and AI execution for all client accounts immediately. It does not close positions, move capital or touch funds — automation can trade, it can never withdraw. The event is logged with your operator identity.</p>
+    <label class="kd-check"><input type="checkbox" id="kd-confirm"> Stop all automated trading platform-wide now</label>
+    <div class="dialog-actions">
+      <button class="btn btn-ghost" id="kd-cancel">Cancel</button>
+      <button class="btn btn-danger" id="kd-go" disabled>Confirm stop</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="ops.js"></script>
+</body>
+</html>
