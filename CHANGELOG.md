@@ -1,5 +1,39 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · Copy Trading (`feature/copy-trading`)
+
+**Implemented**
+- `app/copy.html` (discovery), `app/provider.html` (profile), shared
+  `copy.css`, `copy-data.js`, `copy.js`, `provider.js` per Design Architecture
+  §7.7 / journey J3 and `docs/specs/COPY_TRADING_SPEC.md`.
+- Discovery: classification filter + behavioral sorts only (verified history,
+  lowest drawdown, lowest frequency — **no ROI sort or leaderboard**);
+  provider cards show verified months, max DD, avg win:avg loss, hold,
+  frequency, concentration, attention/drift flags.
+- Profile: Strategy DNA meters (5 traits, amber attention marks), seeded
+  equity + drawdown-from-peak curves with DEMO watermark, "Ask ELVA about this
+  provider" behavioral analysis (explicitly not a verdict; AI-offline degrades
+  commentary only — data and controls stay usable).
+- Start Copying (Risk Boundary): dedicated allocation capped by Unallocated
+  ($5,000), risk multiplier, max position size, max daily loss, max allocation
+  drawdown, stop-copy conditions (at least one required) → contract review →
+  simulated confirmation receipt. REU/kill switch block activation (fail
+  closed) and recover.
+- Atlas FX relationship monitor: contract settings, execution divergence,
+  drift watch (day 3 of 7 against stop-copy condition), pause/resume and stop
+  flows with two-step confirms, halt states under REU/kill.
+- Nav: "Copy" activated on all app pages; Command Center Copy card links to
+  the Atlas monitor; kill-switch dialog copy now includes copy execution.
+
+**QA evidence**
+- Both pages: no horizontal overflow at 1440/1280/1024/768/390/375/360; no
+  console errors.
+- Programmatic tests pass: filter/sort behavior, no-ROI sort audit, DNA and
+  curve rendering, Lens ask + offline, allocation-cap and stop-copy-required
+  validation, contract REU block/recover, confirmed receipt, monitor
+  pause/resume/stop and halt states.
+
+
 ## 2026-09-30 — Phase B · AI Permissions + Risk Check + Confirmation (`feature/permissions-confirm`)
 
 **Implemented**
