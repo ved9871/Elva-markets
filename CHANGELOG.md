@@ -1,5 +1,25 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Refactor · Shared design tokens (`feature/shared-tokens`)
+
+- **Canonical token file:** `assets/tokens.css` — the single source of truth
+  for all Design System v1.0 primitives (logo-anchored palette, status colors
+  with their semantic rules, typography, radii), documented per
+  `docs/ELVA_DESIGN_ARCHITECTURE_v1.md` §3.
+- **Sync mechanism for static deploy roots:** `scripts/sync_tokens.py` copies
+  the canonical file to `landing/tokens.css` and `app/tokens.css` (the dev
+  servers, GitHub Pages paths and artifacts each serve from their own root);
+  `--check` mode exits non-zero on drift for QA/CI use.
+- Duplicated `:root` token blocks removed from `app/app.css` and
+  `landing/styles.css` (each keeps only page-scope vars: rail/topstrip sizes,
+  landing container); `tokens.css` linked before the page stylesheet in all
+  15 HTML heads.
+- Verified with fresh caches: token resolution (blue/cyan/violet/fonts) and
+  styling intact on app + landing; all 14 app pages confirmed linking the
+  shared file; no console errors. Both client artifacts republished on their
+  existing URLs (app v2, landing v2).
+
+
 ## 2026-09-30 — Phase B · Admin / Operations Console (`feature/ops-console`)
 
 **Implemented — final Phase B screen group (12 of 12)**
