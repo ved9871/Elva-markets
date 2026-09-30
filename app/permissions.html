@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELVA — AI Permissions</title>
+<meta name="description" content="ELVA Markets client app prototype — AI Permissions, Risk Check and Confirmation. Demo environment, all figures illustrative.">
+<link rel="icon" type="image/png" href="assets/elva-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="permissions.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell">
+
+  <!-- NAV RAIL -->
+  <nav class="rail" aria-label="Primary">
+    <a class="rail-brand" href="index.html" aria-label="ELVA home">
+      <img src="assets/elva-mark.png" alt="" width="30" height="25">
+      <span class="rail-word">ELVA</span>
+    </a>
+    <ul class="rail-list">
+      <li><a class="rail-item" href="index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5.5v-5h-5v5H4Z"/></svg>
+        <span>Home</span></a></li>
+      <li><a class="rail-item" href="trade.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>
+        <span>Trade</span></a></li>
+      <li><a class="rail-item active" href="intelligence.html" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v3m0 10v3m8-8h-3M7 12H4m13.5-5.5-2 2m-7 7-2 2m11 0-2-2m-7-7-2-2"/><circle cx="12" cy="12" r="3.2"/></svg>
+        <span>Intelligence</span></a></li>
+      <li><span class="rail-item soon" title="Screen group 7 — Copy Trading">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M15.5 6a3 3 0 1 1 0 5.8M15 13.6A5.5 5.5 0 0 1 20.5 19"/></svg>
+        <span>Copy</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 8 — Bot Trading">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="8" width="14" height="10" rx="2"/><path d="M12 8V4m-6.5 9h.01M18.5 13h.01M9 15.5h6"/><circle cx="9" cy="12.5" r=".8"/><circle cx="15" cy="12.5" r=".8"/></svg>
+        <span>Bots</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 10 — Capital flows">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5 12 4l8 4.5-8 4.5Z"/><path d="m4 12.5 8 4.5 8-4.5M4 16.5 12 21l8-4.5"/></svg>
+        <span>Capital</span></span></li>
+      <li><span class="rail-item soon" title="Screen group 10 — Activity &amp; statements">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9"/></svg>
+        <span>Activity</span></span></li>
+    </ul>
+    <div class="rail-foot">
+      <span class="rail-item soon" title="Screen group 10 — Account &amp; security">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
+        <span>Account</span></span>
+      <p class="rail-status"><span class="dot dot-demo"></span><span class="rail-status-text">Demo build</span></p>
+    </div>
+  </nav>
+
+  <div class="body-col">
+
+    <!-- TOP STRIP -->
+    <header class="topstrip">
+      <h1 class="page-title">AI Permissions</h1>
+      <div class="spine-mini" title="Illustrative capital split — demo data">
+        <span class="spine-mini-bar" aria-hidden="true">
+          <i class="ms ms-active" style="flex:128"></i><i class="ms ms-res" style="flex:32"></i><i class="ms ms-pen" style="flex:8"></i><i class="ms ms-wd" style="flex:32"></i><i class="ms ms-un" style="flex:50"></i>
+        </span>
+        <span class="data">$25,000</span>
+        <span class="asof" id="spine-asof" hidden>delayed +2.4s</span>
+      </div>
+      <div class="topstrip-right">
+        <span class="chip chip-state" id="global-trust" data-state="demo">DEMO</span>
+        <button class="kill-pill" id="kill-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v7"/><path d="M6.6 7a7 7 0 1 0 10.8 0"/></svg>
+          Kill automation
+        </button>
+        <div class="simctl">
+          <button class="simctl-btn" id="sim-btn" aria-expanded="false" aria-controls="sim-menu">Demo states ▾</button>
+          <div class="simctl-menu" id="sim-menu" hidden>
+            <p class="simctl-head">Prototype state preview</p>
+            <label><input type="checkbox" id="st-ai"> AI offline</label>
+            <label><input type="checkbox" id="st-risk"> Risk Engine unavailable</label>
+            <label><input type="checkbox" id="st-delay"> Data delayed</label>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SYSTEM BANNERS -->
+    <div class="banners" aria-live="polite">
+      <div class="banner banner-risk" id="banner-risk" hidden>
+        <strong>Risk Engine unavailable.</strong> Automated execution is blocked — fail closed. Manual trading is unaffected.
+      </div>
+      <div class="banner banner-info" id="banner-kill" hidden>
+        <strong>Automation stopped.</strong> All bot and AI trading halted. Funds and allocations untouched. Event logged to your audit trail.
+        <button class="banner-undo" id="kill-undo">Re-enable</button>
+      </div>
+    </div>
+
+    <main id="main" class="perm">
+
+      <p class="crumb"><a href="intelligence.html">← Intelligence</a></p>
+
+      <!-- MODES -->
+      <section class="panel" aria-labelledby="pm-mode-h">
+        <header class="panel-head">
+          <h2 id="pm-mode-h">Operating mode</h2>
+          <span class="rb-tag">Risk Boundary</span>
+        </header>
+        <div class="mode-seg" role="group" aria-label="AI operating mode">
+          <button class="mseg" id="m-copilot" aria-pressed="false">Copilot</button>
+          <button class="mseg active" id="m-confirm" aria-pressed="true">Confirm</button>
+          <button class="mseg locked" id="m-auto" disabled title="Not available in this phase">Autopilot <span class="lock" aria-hidden="true">🔒</span></button>
+        </div>
+        <p class="mode-note" id="mode-note">Confirm — ELVA prepares each action; nothing executes until you explicitly approve it, and every action passes the Risk Engine first.</p>
+      </section>
+
+      <!-- MATRIX + BOUNDARIES -->
+      <div class="perm-grid">
+        <section class="panel" aria-labelledby="mx-h">
+          <header class="panel-head">
+            <h2 id="mx-h">Permission matrix</h2>
+            <span class="rb-tag">Risk Boundary</span>
+          </header>
+          <ul class="mx-list">
+            <li class="mx-row">
+              <span class="mx-what">Analyze markets &amp; explain</span>
+              <span class="mx-state ok">Always allowed</span>
+            </li>
+            <li class="mx-row">
+              <span class="mx-what">Build &amp; challenge strategies</span>
+              <span class="mx-state ok">Always allowed</span>
+            </li>
+            <li class="mx-row">
+              <span class="mx-what">Open trades</span>
+              <span class="mx-state cond" id="mx-open">With your approval</span>
+            </li>
+            <li class="mx-row">
+              <span class="mx-what">Modify stop loss / take profit<br><small>Tighten or trail protective levels on open AI positions</small></span>
+              <label class="mx-toggle"><input type="checkbox" id="pg-sltp" checked><span class="mx-track" aria-hidden="true"></span><span class="visually-hidden">Granted</span></label>
+            </li>
+            <li class="mx-row">
+              <span class="mx-what">Close trades<br><small>Exit AI positions when the thesis is invalidated</small></span>
+              <label class="mx-toggle"><input type="checkbox" id="pg-close" checked><span class="mx-track" aria-hidden="true"></span><span class="visually-hidden">Granted</span></label>
+            </li>
+          </ul>
+          <p class="mx-divider">Never — by architecture, not settings</p>
+          <ul class="mx-list mx-never">
+            <li><span class="lock" aria-hidden="true">🔒</span> Withdraw funds <em>your custody controls only</em></li>
+            <li><span class="lock" aria-hidden="true">🔒</span> Change wallets or security settings <em>your security controls</em></li>
+            <li><span class="lock" aria-hidden="true">🔒</span> Increase its own capital allocation <em>you</em></li>
+            <li><span class="lock" aria-hidden="true">🔒</span> Touch unallocated capital <em>held apart</em></li>
+            <li><span class="lock" aria-hidden="true">🔒</span> Override the Risk Engine <em>not permitted</em></li>
+          </ul>
+          <p class="mx-foot">Permission changes are written to your audit trail and take effect on the next AI action.</p>
+        </section>
+
+        <aside class="panel" aria-labelledby="bd-h">
+          <header class="panel-head">
+            <h2 id="bd-h">Boundary profile</h2>
+            <span class="chip chip-demo">DEMO</span>
+          </header>
+          <ul class="bd-list">
+            <li><span>AI allocation</span><span class="data">$2,000</span></li>
+            <li><span>Max risk per trade</span><span class="data">1.0%</span></li>
+            <li><span>Max daily loss</span><span class="data">$400</span></li>
+            <li><span>Max leverage</span><span class="data">10x</span></li>
+            <li><span>Max simultaneous positions</span><span class="data">8</span></li>
+            <li><span>Instruments</span><span class="data">FX majors · Metals</span></li>
+            <li><span>News restriction</span><span class="data">No new entries ±15m of tier-1 events</span></li>
+          </ul>
+          <p class="mx-foot">Enforced by the deterministic Risk Engine — outside the AI. Editing ships with the Capital screen group and requires explicit re-confirmation.</p>
+        </aside>
+      </div>
+
+      <!-- PENDING ACTION FLOW -->
+      <section class="panel flow-panel" aria-labelledby="fl-h">
+        <header class="panel-head">
+          <h2 id="fl-h">Awaiting your confirmation</h2>
+          <span class="chip chip-state" data-trust>DEMO</span>
+        </header>
+
+        <div id="lens-offline" hidden>
+          <p class="flow-empty"><strong>No pending AI actions — Intelligence is offline.</strong><br>Your permissions above remain in force and editable. Trading is unaffected.</p>
+        </div>
+
+        <div id="lens-body">
+
+          <div class="flow-empty" id="flow-none" hidden>
+            <p><strong>Nothing awaiting confirmation.</strong><br>XAUUSD Mean Reversion is already executing — you confirmed it at 09:45. It is being watched by the Position Monitor.</p>
+            <a class="btn btn-ghost" href="strategy.html?s=xauusd-meanrev">Open its monitor →</a>
+          </div>
+
+          <div id="flow" >
+            <ol class="steps" id="steps">
+              <li class="on" data-step="1"><span>1</span>Review</li>
+              <li data-step="2"><span>2</span>Risk check</li>
+              <li data-step="3"><span>3</span>Confirm</li>
+              <li data-step="4"><span>4</span>Executed</li>
+            </ol>
+
+            <div class="flow-block" id="flow-blocked" hidden>
+              <p id="flow-blocked-msg"></p>
+            </div>
+
+            <!-- STEP 1 · REVIEW -->
+            <section class="step-card" id="step-1" aria-labelledby="s1-h" tabindex="-1">
+              <h3 id="s1-h" class="visually-hidden">Step 1 — Review proposal</h3>
+              <article class="proposal">
+                <header class="proposal-head">
+                  <span class="answer-id"><img src="assets/elva-mark.png" alt="" width="18" height="15"> ELVA proposes</span>
+                  <a class="proposal-link" href="strategy.html?s=eurusd-breakout">Full analysis →</a>
+                </header>
+                <p class="proposal-title">Buy <strong>EURUSD</strong> — Breakout (Trend family)</p>
+                <ul class="proposal-kv">
+                  <li><span>Entry</span><span class="data">1.0895</span></li>
+                  <li><span>Stop loss</span><span class="data">1.0860</span></li>
+                  <li><span>Take profit</span><span class="data">1.0965</span></li>
+                  <li><span>Size</span><span class="data">0.20 lots</span></li>
+                  <li><span>Est. risk</span><span class="data">$70 · 0.35%</span></li>
+                </ul>
+                <p class="proposal-note">Setup confidence <strong class="data">64</strong> — model confidence in the setup, not a probability of profit. Runs inside your <span class="data">$2,000</span> AI allocation.</p>
+              </article>
+              <div class="step-actions">
+                <button class="btn btn-ghost" id="s1-dismiss">Dismiss proposal</button>
+                <button class="btn btn-primary" id="s1-next">Run Risk Check →</button>
+              </div>
+              <p class="mode-gate" id="mode-gate" hidden>Switch to <strong>Confirm</strong> mode above to approve prepared actions. In Copilot mode, ELVA analyzes only.</p>
+            </section>
+
+            <!-- STEP 2 · RISK CHECK -->
+            <section class="step-card" id="step-2" hidden aria-labelledby="s2-h" tabindex="-1">
+              <h3 id="s2-h" class="visually-hidden">Step 2 — Risk check</h3>
+              <div class="riskbox2" id="rc-ok" hidden>
+                <p class="verdict-head">Risk Engine — deterministic check</p>
+                <table class="rc-table">
+                  <thead><tr><th scope="col">Rule</th><th scope="col">Limit</th><th scope="col">Proposed</th><th scope="col">Result</th></tr></thead>
+                  <tbody>
+                    <tr><td>Risk per trade</td><td>1.0%</td><td>0.35%</td><td class="rc-pass">PASS</td></tr>
+                    <tr><td>Daily loss cap</td><td>$400</td><td>$120 used</td><td class="rc-pass">PASS</td></tr>
+                    <tr><td>Max leverage</td><td>10x</td><td>8x</td><td class="rc-pass">PASS</td></tr>
+                    <tr><td>Instrument</td><td>FX majors</td><td>EURUSD</td><td class="rc-pass">PASS</td></tr>
+                    <tr><td>News restriction</td><td>±15m tier-1</td><td>CPI in 3h 49m</td><td class="rc-pass">PASS</td></tr>
+                  </tbody>
+                </table>
+                <p class="rc-verdict v-pass">VERDICT: PASSED</p>
+                <p class="rc-stamp" id="rc-stamp"></p>
+              </div>
+              <div class="riskbox2 rc-down" id="rc-down" hidden>
+                <p class="verdict-head">Risk Engine — deterministic check</p>
+                <p class="rc-fail"><strong>No verdict — Risk Engine unavailable.</strong></p>
+                <p class="rc-fail-sub">Automated execution is blocked (fail closed). This proposal cannot advance until the engine returns. Manual trading is unaffected.</p>
+              </div>
+              <div class="step-actions">
+                <button class="btn btn-ghost" id="s2-back">← Back</button>
+                <button class="btn btn-primary" id="s2-next">Continue to Confirm →</button>
+              </div>
+            </section>
+
+            <!-- STEP 3 · CONFIRM -->
+            <section class="step-card" id="step-3" hidden aria-labelledby="s3-h" tabindex="-1">
+              <h3 id="s3-h" class="visually-hidden">Step 3 — Confirm</h3>
+              <ol class="chain">
+                <li class="done">AI suggested</li>
+                <li class="done">Risk Engine <strong>PASSED</strong></li>
+                <li class="now">Your permission</li>
+                <li>Execution Engine</li>
+              </ol>
+              <ul class="confirm-list">
+                <li><span>Action</span><strong>Buy EURUSD · Market</strong></li>
+                <li><span>Size</span><strong>0.20 lots</strong></li>
+                <li><span>Entry ≈</span><strong>1.0895</strong></li>
+                <li><span>Stop loss</span><strong>1.0860</strong></li>
+                <li><span>Take profit</span><strong>1.0965</strong></li>
+                <li><span>Est. risk</span><strong>$70 · 0.35% of AI allocation</strong></li>
+                <li><span>Boundaries</span><strong>All limits apply; unallocated capital unreachable</strong></li>
+              </ul>
+              <p class="confirm-note">Demo build — this execution is simulated. No real order is placed.</p>
+              <div class="step-actions">
+                <button class="btn btn-ghost" id="s3-cancel">Cancel</button>
+                <button class="btn btn-primary" id="s3-go">Confirm — execute now</button>
+              </div>
+            </section>
+
+            <!-- STEP 4 · EXECUTED -->
+            <section class="step-card" id="step-4" hidden aria-labelledby="s4-h" tabindex="-1">
+              <h3 id="s4-h" class="visually-hidden">Step 4 — Executed</h3>
+              <div class="receipt">
+                <p class="receipt-head">Executed <span class="chip chip-demo">DEMO · simulated</span></p>
+                <ul class="receipt-list">
+                  <li><span>Fill</span><strong class="data">Buy 0.20 EURUSD @ 1.0895</strong></li>
+                  <li><span>Time</span><strong class="data" id="rcp-time">—</strong></li>
+                  <li><span>Audit</span><strong class="data">AI-EXEC-0042 · confirmation + verdict logged</strong></li>
+                  <li><span>Monitoring</span><strong>Position Monitor active — invalidation 1.0840 watched</strong></li>
+                </ul>
+                <div class="step-actions">
+                  <a class="btn btn-primary" href="strategy.html?s=eurusd-breakout">Open monitor →</a>
+                  <a class="btn btn-ghost" href="trade.html">Trading Workspace</a>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </section>
+
+      <p class="intel-disclaimer">Analysis, not advice. AI never executes without a Risk Engine verdict and, in Confirm mode, your explicit approval. Trading involves significant risk of loss. All content on this page is demo data.</p>
+
+    </main>
+
+    <!-- BOTTOM TABS (mobile) -->
+    <nav class="tabbar" aria-label="Primary mobile">
+      <a class="tab" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5.5v-5h-5v5H4Z"/></svg>Home</a>
+      <a class="tab" href="trade.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>Trade</a>
+      <a class="tab active" href="intelligence.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 4v3m0 10v3m8-8h-3M7 12H4"/></svg>Intelligence</a>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5 12 4l8 4.5-8 4.5Z"/><path d="m4 12.5 8 4.5 8-4.5"/></svg>Capital</span>
+      <span class="tab soon" title="Coming next"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/></svg>More</span>
+    </nav>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="perm-toast" role="status" aria-live="polite" hidden></div>
+
+<!-- KILL SWITCH DIALOG -->
+<div class="dialog-backdrop" id="kill-dialog" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="kd-h" aria-describedby="kd-p">
+    <h2 id="kd-h">Stop all automation?</h2>
+    <p id="kd-p">This halts every bot and all AI trading immediately. It does not close positions, move capital or touch your funds — bots and AI can trade, they can never withdraw. The event is written to your audit trail.</p>
+    <label class="kd-check"><input type="checkbox" id="kd-confirm"> Stop all bot and AI trading now</label>
+    <div class="dialog-actions">
+      <button class="btn btn-ghost" id="kd-cancel">Cancel</button>
+      <button class="btn btn-danger" id="kd-go" disabled>Confirm stop</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="permissions.js"></script>
+</body>
+</html>

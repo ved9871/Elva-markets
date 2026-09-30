@@ -1,5 +1,37 @@
 # ELVA Markets — Changelog
 
+## 2026-09-30 — Phase B · AI Permissions + Risk Check + Confirmation (`feature/permissions-confirm`)
+
+**Implemented**
+- `app/permissions.html|permissions.css|permissions.js` per Design Architecture
+  §7.6 / journey J2 and `docs/specs/PERMISSIONS_CONFIRM_SPEC.md`.
+- Permission matrix: always-allowed rows, mode-dependent "Open trades", two
+  audited grant toggles (modify SL/TP, close trades) with consequence copy —
+  and five **NEVER rows rendered as architecture** (no inputs, no toggles):
+  withdraw, wallets/security, raise own allocation, touch unallocated,
+  override Risk Engine.
+- Boundary profile recap (read-only; editing deferred to Capital group).
+- Four-step confirmation flow: Review proposal (Lens-voiced, links to full
+  analysis) → Risk check (auto verdict table + engine stamp; REU renders red
+  no-verdict fail-closed and halts the flow) → Confirm (decision chain
+  "AI suggested → Risk Engine PASSED → your permission → Execution Engine" +
+  full restatement) → Executed (simulated receipt, audit id, monitor hand-off).
+- Gates: Copilot mode disables flow start; kill switch blocks the flow until
+  re-enabled; AI-offline replaces the flow (permissions stay editable);
+  dismiss/cancel paths logged; `?flow=xauusd-meanrev` shows honest
+  already-executing state.
+- Strategy Detail's gated button now enables after a PASSED check as
+  "Continue to Confirm →" (REU re-disables); Intelligence Home links to
+  "Manage permissions".
+
+**QA evidence**
+- No horizontal overflow at 1440/1280/1024/768/390/375/360; no console errors.
+- Programmatic tests pass: NEVER rows non-interactive, Copilot gate, toggle
+  audit toasts, REU block/recover, kill block/recover (verified with deferred
+  read after an initial test race), happy path to receipt with step rail
+  states, strategy→permissions handoff, already-executing variant.
+
+
 ## 2026-09-30 — Phase B · Strategy Detail (`feature/strategy-detail`)
 
 **Implemented**

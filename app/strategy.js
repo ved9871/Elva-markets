@@ -103,12 +103,11 @@
 
   var CYCLE = ["ASK", "ANALYZE", "CHALLENGE", "BUILD", "RISK CHECK", "CONFIRM", "EXECUTE", "MONITOR", "REVIEW"];
 
-  function getStrat() {
+  var stratKey = (function () {
     var m = /[?&]s=([^&]+)/.exec(location.search);
-    return STRATS[m && m[1]] || STRATS["eurusd-breakout"];
-  }
-
-  var S = getStrat();
+    return STRATS[m && m[1]] ? m[1] : "eurusd-breakout";
+  })();
+  var S = STRATS[stratKey];
 
   /* ---------- render ---------- */
   document.title = "ELVA — " + S.name;
@@ -162,6 +161,7 @@
       $("rc-unavail").hidden = false;
       riskbox.classList.add("unavail");
       $("rc-confirm").disabled = true;
+      $("rc-confirm").textContent = "Confirm & execute — blocked (fail closed)";
       $("rc-run").textContent = "Re-run Risk Check";
       return;
     }
@@ -178,7 +178,11 @@
     $("rc-result").hidden = false;
     riskbox.classList.add("checked");
     $("rc-run").textContent = "Re-run Risk Check";
-    /* confirm stays disabled — screen group 6 */
+    var c = $("rc-confirm");
+    c.disabled = false;
+    c.textContent = "Continue to Confirm →";
+    c.removeAttribute("title");
+    c.onclick = function () { location.href = "permissions.html?flow=" + stratKey; };
   }
   $("rc-run").addEventListener("click", runCheck);
   if ($("st-risk")) {
